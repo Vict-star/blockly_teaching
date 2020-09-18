@@ -1,0 +1,202 @@
+<xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none">
+  <variables>
+    <variable id="w,9]6S=vqO[btLjHyvFn">n</variable>
+    <variable id="TN60?(%mns1Tha?daqma">source_dict</variable>
+    <variable id="1K;JmdJq]xznS%%tbtk|">new_key</variable>
+    <variable id="SEm*fth`@:}PQrqn|/|+">new_value</variable>
+    <variable id="7{s9).s6vl.9`Ep]R1}s">enable_dict</variable>
+    <variable id="dcLq/])-wl+NDR%Z~?U`">i</variable>
+  </variables>
+  <block type="plan_init3" id="yuM8L)q/1)264bKgq`SL" x="63" y="212">
+    <next>
+      <block type="variables_set" id="[cI3x?E^Zo;Y+4!6o)1D">
+        <field name="VAR" id="w,9]6S=vqO[btLjHyvFn">n</field>
+        <value name="VALUE">
+          <block type="plan_string_to_int" id="+*OPrM!?[_mz82AZEksc">
+            <value name="NAME">
+              <block type="text_prompt_ext" id="QSgk*}S:[.8#.3p:nUT7">
+                <mutation type="TEXT"></mutation>
+                <field name="TYPE">TEXT</field>
+                <value name="TEXT">
+                  <shadow type="text" id="V:=,1-Y:p4*xlmo0-y:4">
+                    <field name="TEXT">shur</field>
+                  </shadow>
+                  <block type="text" id="4vJt*%|-2U`,H(~pV1-Z">
+                    <field name="TEXT">输入知识点数量</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="w9B}s*pk`cA;pg5Z8*cF">
+            <field name="VAR" id="TN60?(%mns1Tha?daqma">source_dict</field>
+            <value name="VALUE">
+              <block type="plan_dict_create" id="^/#~5laJK[949(jNtFKf"></block>
+            </value>
+            <next>
+              <block type="controls_repeat_ext" id="TKeDMWA7W3opKKJ7J8*)">
+                <value name="TIMES">
+                  <shadow type="math_number" id="VKx;V::lw1k(#7fv:fu,">
+                    <field name="NUM">10</field>
+                  </shadow>
+                  <block type="variables_get" id="UlfGsb)0Ny.#[?bKDbd,">
+                    <field name="VAR" id="w,9]6S=vqO[btLjHyvFn">n</field>
+                  </block>
+                </value>
+                <statement name="DO">
+                  <block type="variables_set" id="s[a@ii[4eo9iXTXn=~Bu">
+                    <field name="VAR" id="1K;JmdJq]xznS%%tbtk|">new_key</field>
+                    <value name="VALUE">
+                      <block type="text_prompt_ext" id="x61rdG_))L`Nx+4.O;t%">
+                        <mutation type="TEXT"></mutation>
+                        <field name="TYPE">TEXT</field>
+                        <value name="TEXT">
+                          <shadow type="text" id="nN+M9l83ikXfOb,(6mYr">
+                            <field name="TEXT">abc</field>
+                          </shadow>
+                          <block type="text" id=";:lX$z)u{U,U8*u}%3)Q">
+                            <field name="TEXT">输入知识点</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="q!R#[AwOiZ}td`iN^(-O">
+                        <field name="VAR" id="SEm*fth`@:}PQrqn|/|+">new_value</field>
+                        <value name="VALUE">
+                          <block type="plan_object" id="cPS(-*(e3nSPeLsTfKOk">
+                            <value name="NAME">
+                              <block type="plan_string_to_list" id="u9KUX;,Ijm1aZWd|d3jg">
+                                <value name="NAME">
+                                  <block type="text_prompt_ext" id="2;(Q$o*%)D[~8YvjkcaM">
+                                    <mutation type="TEXT"></mutation>
+                                    <field name="TYPE">TEXT</field>
+                                    <value name="TEXT">
+                                      <shadow type="text" id="Yp+2wKe5=i}(YfV:Vv@j">
+                                        <field name="TEXT">abc</field>
+                                      </shadow>
+                                      <block type="text" id="/8_V$cS|zZ0LWAMi94_d">
+                                        <field name="TEXT">输入后继知识点</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="plan_dict_push" id="hiO9As_G0Awqzr}Glz_S">
+                            <value name="dict">
+                              <block type="variables_get" id="aX|00wbc+u.mN$^Ct[8h">
+                                <field name="VAR" id="TN60?(%mns1Tha?daqma">source_dict</field>
+                              </block>
+                            </value>
+                            <value name="key">
+                              <block type="variables_get" id="93:%r.*}{NR1k(|gK~:b">
+                                <field name="VAR" id="1K;JmdJq]xznS%%tbtk|">new_key</field>
+                              </block>
+                            </value>
+                            <value name="value">
+                              <block type="variables_get" id="6up8d6HWMm4W~t|9K@~2">
+                                <field name="VAR" id="SEm*fth`@:}PQrqn|/|+">new_value</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="plan_input2" id=",oQ[57Yc[D!;hJL;#rfC">
+                    <value name="NAME">
+                      <block type="variables_get" id="d%!!J@6fxlCdjCmpL~tO">
+                        <field name="VAR" id="TN60?(%mns1Tha?daqma">source_dict</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id=",lT8T`=??=oLsi*/KTJE">
+                        <field name="VAR" id="7{s9).s6vl.9`Ep]R1}s">enable_dict</field>
+                        <value name="VALUE">
+                          <block type="plan_divide_dict1" id="G`]MxCc_Px^(FZzAM`|J"></block>
+                        </value>
+                        <next>
+                          <block type="controls_whileUntil" id=":JWH,`kzZF]I^Cp$j5X!">
+                            <field name="MODE">WHILE</field>
+                            <value name="BOOL">
+                              <block type="plan_check_finish1" id="wZ9*Ig%9lNHcope9/VAX">
+                                <value name="NAME">
+                                  <block type="variables_get" id="U0]6^C=it8sB*!!qTU^?">
+                                    <field name="VAR" id="7{s9).s6vl.9`Ep]R1}s">enable_dict</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO">
+                              <block type="controls_forEach" id="Dx6HHU;hB{:FCb@mF7Ou">
+                                <field name="VAR" id="dcLq/])-wl+NDR%Z~?U`">i</field>
+                                <value name="LIST">
+                                  <block type="variables_get" id="*!s4wMvW4f@+IkQaUfrd">
+                                    <field name="VAR" id="7{s9).s6vl.9`Ep]R1}s">enable_dict</field>
+                                  </block>
+                                </value>
+                                <statement name="DO">
+                                  <block type="plan_deal1" id="9DU/*2m-or%6w8:FeRKW">
+                                    <value name="enable_dict">
+                                      <block type="variables_get" id="ar5kzB}!;c6HDv5]JSRj">
+                                        <field name="VAR" id="7{s9).s6vl.9`Ep]R1}s">enable_dict</field>
+                                      </block>
+                                    </value>
+                                    <value name="i">
+                                      <block type="variables_get" id="D0yU^hoI[Gun5V~fQwN2">
+                                        <field name="VAR" id="dcLq/])-wl+NDR%Z~?U`">i</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="plan_append_answer1" id="cIz~J`eMGoGIx6W2,pRw">
+                                        <value name="NAME">
+                                          <block type="variables_get" id="6K`eVO.rP@hI-!^#t$kH">
+                                            <field name="VAR" id="dcLq/])-wl+NDR%Z~?U`">i</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <block type="variables_set" id="`-3K_Em.yk-mm#.NLE^3">
+                                    <field name="VAR" id="7{s9).s6vl.9`Ep]R1}s">enable_dict</field>
+                                    <value name="VALUE">
+                                      <block type="plan_divide_dict1" id="Y[bf2xSNbQ?c{SIe$i4n"></block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="text_print" id="cAV:dUI~;#}fB`E/5nLq">
+                                <value name="TEXT">
+                                  <shadow type="text" id="DPDYkm{IxMe#@!U3.zdN">
+                                    <field name="TEXT">abc</field>
+                                  </shadow>
+                                  <block type="plan_output3" id="$g1F:92=r|HeM|dHZ,kX"></block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

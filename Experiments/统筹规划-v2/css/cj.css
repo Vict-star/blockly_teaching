@@ -1,0 +1,23 @@
+@font-face {  
+	font-family: zcool_happy;  
+	src: url("../ttf/zcool_happy.ttf")
+} 
+body{
+    background: #000000 url(../image/main-bg.jpg);
+}
+.main-wrp{
+    background:#fff;
+    box-shadow:0px 0px 10px #555;
+    padding: 20px;
+}
+.container,.header,.footer{
+	/* for smooth animated effect */
+	transition:all .2s linear;
+	-moz-transition:all .2s linear;/* firefox */
+	-webkit-transition:all .2s linear; /* safari and chrome */
+	-o-transition:all .2s linear; /* opera */
+	-ms-transition:all .2s linear;
+}
+.cj-alert-box{
+	font-family: zcool_happy;
+}

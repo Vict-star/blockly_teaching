@@ -1,0 +1,65 @@
+<xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none">
+  <variables>
+    <variable id="Jbv?N%!r^p,V.AdDbuYz">enable_dict</variable>
+    <variable id="*h)!bHYn7T.aK9hJK4%T">i</variable>
+  </variables>
+  <block type="plan_input2" id="VK8xJrh_aoMIbIr*zDSj" x="-162" y="-113">
+    <next>
+      <block type="variables_set" id="M?|]78`e$qe~NngNs%sp">
+        <field name="VAR" id="Jbv?N%!r^p,V.AdDbuYz">enable_dict</field>
+        <value name="VALUE">
+          <block type="plan_divide_dict1" id="l[5*c=kn|nC?PG[f2HQj"></block>
+        </value>
+        <next>
+          <block type="controls_whileUntil" id="j4SR{PqK(zM%pvk+7BS;">
+            <field name="MODE">WHILE</field>
+            <statement name="DO">
+              <block type="controls_forEach" id="9Q1W1:*[cy)TOGqD/q.H">
+                <field name="VAR" id="*h)!bHYn7T.aK9hJK4%T">i</field>
+                <value name="LIST">
+                  <block type="variables_get" id="Z5TL~zE$=^%WXCo$mJi=">
+                    <field name="VAR" id="Jbv?N%!r^p,V.AdDbuYz">enable_dict</field>
+                  </block>
+                </value>
+                <statement name="DO">
+                  <block type="plan_deal1" id="Ov,*2K9iIBMVm;j@u)C1">
+                    <value name="enable_dict">
+                      <block type="variables_get" id="OfI(l{{L1EH|=4C@4yGj">
+                        <field name="VAR" id="Jbv?N%!r^p,V.AdDbuYz">enable_dict</field>
+                      </block>
+                    </value>
+                    <value name="i">
+                      <block type="variables_get" id="N9!yq^{%]N3o%vwiY-Nh">
+                        <field name="VAR" id="*h)!bHYn7T.aK9hJK4%T">i</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="plan_append_answer1" id="+XTSRb(fGBJX(JHVz}mb">
+                        <value name="NAME">
+                          <block type="variables_get" id="=,@3w~Re[b6MyN{OYO{[">
+                            <field name="VAR" id="*h)!bHYn7T.aK9hJK4%T">i</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="variables_set" id="@+XX/j7@x9UsWk+~o|e0">
+                    <field name="VAR" id="Jbv?N%!r^p,V.AdDbuYz">enable_dict</field>
+                    <value name="VALUE">
+                      <block type="plan_divide_dict1" id="WQN:@4avO1rRin(#L,Xd"></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="plan_output1" id="ib@mdC06-^|jtEOvI-)K"></block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

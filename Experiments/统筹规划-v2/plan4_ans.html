@@ -1,0 +1,423 @@
+<html>
+<head>
+    <meta charset="utf8" />
+    <meta title = "知识点教学安排"/>
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/cj.css">
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/blockly_compressed.js"></script>
+    <script src="js/blocks_compressed.js"></script>
+    <script src="js/python_compressed.js"></script>
+    <script src="js/skulpt.min.js"></script>
+    <script src="js/skulpt-stdlib.js"></script>
+    <script src="js/zh-hans.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="main-wrp">
+      <div class="row">
+        <h2>知识点教学安排</h2>
+        <hr/>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_bg" style="margin-left:20px;">
+          了解题目背景
+        </button>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_tip" style="margin-left:20px;">
+          解答提示
+        </button>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_answer" style="margin-left:20px;">
+          解答提示
+        </button>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-xs-12">
+          <h2>Blockly</h2> 
+          <div id="blockly-div" style="height: 480px; width: 100%; "></div>
+          <xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none">
+            <variables>
+              <variable id="db]VuGOr;-wz,@(G^Av?">source_dict</variable>
+              <variable id="tS=:R%mrliBg#e`=,ev3">remain_dict</variable>
+              <variable id="Jbv?N%!r^p,V.AdDbuYz">enable_dict</variable>
+              <variable id="*h)!bHYn7T.aK9hJK4%T">i</variable>
+              <variable id="CiVOAV?dbA1;}AjRBj,$">j</variable>
+            </variables>
+            <block type="plan_init4" id="iEm9HBW9})w(D$/6SvN1" x="-113" y="-262">
+              <next>
+                <block type="variables_set" id="G!JfBm2X]9Jb:5)*ww-S">
+                  <field name="VAR" id="db]VuGOr;-wz,@(G^Av?">source_dict</field>
+                  <value name="VALUE">
+                    <block type="plan_gen_source" id="S2a[lq1u9,bOG6qRrx}j"></block>
+                  </value>
+                  <next>
+                    <block type="variables_set" id=")1$=XS)R,cc?VDi[vG.-">
+                      <field name="VAR" id="tS=:R%mrliBg#e`=,ev3">remain_dict</field>
+                      <value name="VALUE">
+                        <block type="plan_input4" id="HU`r.zSk~O74lC,C1sc=">
+                          <value name="NAME">
+                            <block type="variables_get" id="-LN#?_;Fwilb;s,]S(9C">
+                              <field name="VAR" id="db]VuGOr;-wz,@(G^Av?">source_dict</field>
+                            </block>
+                          </value>
+                        </block>
+                      </value>
+                      <next>
+                        <block type="variables_set" id="M?|]78`e$qe~NngNs%sp">
+                          <field name="VAR" id="Jbv?N%!r^p,V.AdDbuYz">enable_dict</field>
+                          <value name="VALUE">
+                            <block type="plan_divide_dict1" id="9??}VUDXs_qRSY(U{]jF"></block>
+                          </value>
+                          <next>
+                            <block type="controls_whileUntil" id="j4SR{PqK(zM%pvk+7BS;">
+                              <field name="MODE">WHILE</field>
+                              <value name="BOOL">
+                                <block type="plan_dict_is_empty" id="Uyo]E)?XY-ciH_WPWqY#">
+                                  <value name="NAME">
+                                    <block type="variables_get" id="Doic+sVP4ye^Ng~-3(8L">
+                                      <field name="VAR" id="Jbv?N%!r^p,V.AdDbuYz">enable_dict</field>
+                                    </block>
+                                  </value>
+                                </block>
+                              </value>
+                              <statement name="DO">
+                                <block type="controls_forEach" id="9Q1W1:*[cy)TOGqD/q.H">
+                                  <field name="VAR" id="*h)!bHYn7T.aK9hJK4%T">i</field>
+                                  <value name="LIST">
+                                    <block type="variables_get" id="Z5TL~zE$=^%WXCo$mJi=">
+                                      <field name="VAR" id="Jbv?N%!r^p,V.AdDbuYz">enable_dict</field>
+                                    </block>
+                                  </value>
+                                  <statement name="DO">
+                                    <block type="controls_forEach" id="%9.;;$=pz3m,f-JIJ]x}">
+                                      <field name="VAR" id="CiVOAV?dbA1;}AjRBj,$">j</field>
+                                      <value name="LIST">
+                                        <block type="plan_object_get" id=".(S7(ox-.GoIFv{t#PGO">
+                                          <field name="NAME">nxt</field>
+                                          <value name="NAME">
+                                            <block type="plan_dict_get" id="IBZvYX.9hkCaX3)=~7PO">
+                                              <value name="dict">
+                                                <block type="variables_get" id="0UitI3%1f+-!+Bvpf7nb">
+                                                  <field name="VAR" id="Jbv?N%!r^p,V.AdDbuYz">enable_dict</field>
+                                                </block>
+                                              </value>
+                                              <value name="key">
+                                                <block type="variables_get" id="8KvF0P}0C}2*l)~#N#{7">
+                                                  <field name="VAR" id="*h)!bHYn7T.aK9hJK4%T">i</field>
+                                                </block>
+                                              </value>
+                                            </block>
+                                          </value>
+                                        </block>
+                                      </value>
+                                      <statement name="DO">
+                                        <block type="plan_var_dec" id="L8HVR=B^5r#x^V$sn]oq">
+                                          <value name="NAME">
+                                            <block type="plan_object_get" id="1O_,d,_BptH/=yB3(={N">
+                                              <field name="NAME">pre</field>
+                                              <value name="NAME">
+                                                <block type="plan_dict_get" id="8skzU|*IIt@]2[GHNvN9">
+                                                  <value name="dict">
+                                                    <block type="variables_get" id="0-1JuaFg^hRWl,gk|R{2">
+                                                      <field name="VAR" id="tS=:R%mrliBg#e`=,ev3">remain_dict</field>
+                                                    </block>
+                                                  </value>
+                                                  <value name="key">
+                                                    <block type="variables_get" id="UPXmb0HA(1a+`3FF_W}u">
+                                                      <field name="VAR" id="CiVOAV?dbA1;}AjRBj,$">j</field>
+                                                    </block>
+                                                  </value>
+                                                </block>
+                                              </value>
+                                            </block>
+                                          </value>
+                                        </block>
+                                      </statement>
+                                      <next>
+                                        <block type="plan_append_answer1" id="+XTSRb(fGBJX(JHVz}mb">
+                                          <value name="NAME">
+                                            <block type="variables_get" id="=,@3w~Re[b6MyN{OYO{[">
+                                              <field name="VAR" id="*h)!bHYn7T.aK9hJK4%T">i</field>
+                                            </block>
+                                          </value>
+                                        </block>
+                                      </next>
+                                    </block>
+                                  </statement>
+                                  <next>
+                                    <block type="variables_set" id="@+XX/j7@x9UsWk+~o|e0">
+                                      <field name="VAR" id="Jbv?N%!r^p,V.AdDbuYz">enable_dict</field>
+                                      <value name="VALUE">
+                                        <block type="plan_divide_dict1" id="p0u!3ZZA~4~@d%G|X1?D"></block>
+                                      </value>
+                                    </block>
+                                  </next>
+                                </block>
+                              </statement>
+                              <next>
+                                <block type="text_print" id="Vpu-F;Xf?#7FrjS-n/pv">
+                                  <value name="TEXT">
+                                    <block type="plan_output3" id="A{$5GNnd=RbWS5A6AYwj"></block>
+                                  </value>
+                                </block>
+                              </next>
+                            </block>
+                          </next>
+                        </block>
+                      </next>
+                    </block>
+                  </next>
+                </block>
+              </next>
+            </block>
+          </xml>
+          <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+            <category name="本例提供的块">
+              <block type="plan_init4"></block>
+              <block type="text_prompt_ext">
+                <mutation type="TEXT"></mutation>
+                <field name="TYPE">TEXT</field>
+                <value name="TEXT">
+                  <shadow type="text">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                </value>
+              </block>
+              <block type="text">
+                <field name="TEXT"></field>
+              </block>
+              <block type="plan_string_to_int"></block>
+              <block type="plan_string_to_list"></block>
+              <block type="plan_object"></block>
+              <block type="plan_gen_source"></block>
+              <block type="plan_input4"></block>
+              <block type="plan_object_get">
+                <field name="NAME">OPTIONNAME</field>
+              </block>
+              <block type="plan_divide_dict1"></block>
+              <block type="plan_append_answer1"></block>
+              <block type="plan_output3"></block>
+              <block type="plan_var_dec"></block>
+              <block type="text_print">
+                <value name="TEXT">
+                  <shadow type="text">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                </value>
+              </block>
+            </category>
+            <category name="字典">
+              <block type="plan_dict_create"></block>
+              <block type="plan_dict_push"></block>
+              <block type="plan_dict_pop"></block>
+              <block type="plan_dict_get_all_keys"></block>
+              <block type="plan_dict_is_empty"></block>
+              <block type="plan_dict_get"></block>
+            </category>
+            <category name="列表" colour="#745ba5">
+              <block type="lists_create_with">
+                <mutation items="0"></mutation>
+              </block>
+              <block type="lists_create_with">
+                <mutation items="3"></mutation>
+              </block>
+              <block type="lists_repeat">
+                <value name="NUM">
+                  <shadow type="math_number">
+                    <field name="NUM">5</field>
+                  </shadow>
+                </value>
+              </block>
+              <block type="lists_length"></block>
+              <block type="lists_isEmpty"></block>
+              <block type="lists_indexOf">
+                <field name="END">FIRST</field>
+                <value name="VALUE">
+                  <block type="variables_get">
+                    <field name="VAR" id="sL3Zk=0(qFq~:cH{/RG(">list</field>
+                  </block>
+                </value>
+              </block>
+              <block type="lists_getIndex">
+                <mutation statement="false" at="true"></mutation>
+                <field name="MODE">GET</field>
+                <field name="WHERE">FROM_START</field>
+                <value name="VALUE">
+                  <block type="variables_get">
+                    <field name="VAR" id="sL3Zk=0(qFq~:cH{/RG(">list</field>
+                  </block>
+                </value>
+              </block>
+              <block type="lists_setIndex">
+                <mutation at="true"></mutation>
+                <field name="MODE">SET</field>
+                <field name="WHERE">FROM_START</field>
+                <value name="LIST">
+                  <block type="variables_get">
+                    <field name="VAR" id="sL3Zk=0(qFq~:cH{/RG(">list</field>
+                  </block>
+                </value>
+              </block>
+              <block type="lists_getSublist">
+                <mutation at1="true" at2="true"></mutation>
+                <field name="WHERE1">FROM_START</field>
+                <field name="WHERE2">FROM_START</field>
+                <value name="LIST">
+                  <block type="variables_get">
+                    <field name="VAR" id="sL3Zk=0(qFq~:cH{/RG(">list</field>
+                  </block>
+                </value>
+              </block>
+              <block type="lists_split">
+                <mutation mode="SPLIT"></mutation>
+                <field name="MODE">SPLIT</field>
+                <value name="DELIM">
+                  <shadow type="text">
+                    <field name="TEXT">,</field>
+                  </shadow>
+                </value>
+              </block>
+              <block type="lists_sort">
+                <field name="TYPE">NUMERIC</field>
+                <field name="DIRECTION">1</field>
+              </block>
+            </category>
+            <category name="循环" colour="#5ba55b">
+              <block type="controls_repeat_ext">
+                <value name="TIMES">
+                  <shadow type="math_number">
+                    <field name="NUM">10</field>
+                  </shadow>
+                </value>
+              </block>
+              <block type="controls_whileUntil">
+                <field name="MODE">WHILE</field>
+              </block>
+              <block type="controls_for">
+                <field name="VAR" id="+tK~0_7,S@mOuMz,)#*O">i</field>
+                <value name="FROM">
+                  <shadow type="math_number">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+                <value name="TO">
+                  <shadow type="math_number">
+                    <field name="NUM">10</field>
+                  </shadow>
+                </value>
+                <value name="BY">
+                  <shadow type="math_number">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+              </block>
+              <block type="controls_forEach">
+                <field name="VAR" id="D2;EES-n9epq+AL.NSUF">j</field>
+              </block>
+              <block type="controls_flow_statements">
+                <field name="FLOW">BREAK</field>
+              </block>
+            </category>
+            <category name="变量" colour="#a55b80" custom="VARIABLE"></category>
+            <category name="函数" colour="#995ba5" custom="PROCEDURE"></category>
+          </xml>
+        </div>  
+      </div>
+      <div class="row" style="margin-top: 20px;">
+        <h2>Python Codes</h2> 
+        <button class="btn btn-success" type="button" onclick="run_python('python-code')"> Run </button> 
+      </div>
+      <div class="row" style="margin-top: 20px;">
+        <div id="python-div" class="col-md-6 col-xs-12">
+          <textarea  id="python-code" rows="20" cols="70"></textarea><br>
+        </div>
+        <div class="col-md-6 col-xs-12">
+           <h3>输入:</h3><hr/>
+           <stdin>由于这是在python中，这里将输入重定向</stdin>
+           <!--<textarea id="input" cols="70"></textarea>-->
+           <h3>输出:</h3><hr/>
+           <pre id="output" >点击运行可以看到结果哦</pre>
+        </div>
+      </div>
+    </div>
+ </div>
+  <div class="modal fade" id="btn_pro_bg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body cj-alert-box">
+          <h3>题目背景:</h3><hr/>
+          <p>总所周知，安排教学是一个需要细细考量的活。</p>
+          <p>一个知识点的教导安排要关注到先修知识。</p>
+          <p>显然我们需要安排的教学计划力求教导这个知识点前，这个知识点需要的先修知识点都教过啦。</p>
+          <p>如果我们能够找到一个教学计划满足上面条件，我们称这个计划是优秀的。</p>
+          <p>我们已经能够通过blockly拼出一个可以跑出优秀计划的程序了</p>
+          <p>我们进一步了解python如何去写一个这样的程序了，  我们甚至利用输入输出能应付不同情况</p>
+          <p>但我们中有些代码被隐藏了起来，而现在，我们来研究这些被隐藏起来的代码。</p>
+          <p>在本例中，我们删去了一个块：“从当前可教导的xxx中，安排教导这个x知识点，并更新其余知识点”。</p>
+          <p>现在我们来实现这个块。</p>
+          <h3>题目描述:</h3><hr/>
+          <p>利用之前学的知识实现这个模块。</p>
+          <h3>本题设计目标：</h3> <hr/>
+          <p>本模块作为一个缓冲模块，用于测试前面的知识点了解情况</p>
+          <p>而已经掌握的学员可以了解代码的替代。</p>
+          <br/>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div class="modal fade" id="btn_pro_tip" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body cj-alert-box">
+          <h3>解答</h3><hr/>
+          <p>这个块的语义很简单，就是从当前可教导的xxx中，安排教导这个x知识点，并更新其余知识点</p>
+          <p>我们首先要获得这个xxx列表，也就是enable_dict[i]["nxt"]</p>
+          <p>然后使用循环去遍历这个列表，并且把列表中每一项在remain_dict的pre减一。</p>
+          <p>观察源代码，了解两种写法的异同，并讨论目前这种写法和原先代码写法的优劣。</p>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div class="modal fade" id="btn_pro_answer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+          <img src="image/pro4_answer.png" width="100%"/>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div id = "div_footer"> </div>
+</body>
+<script src="js_plan/cj_dict_block.js"></script>
+<script src="js_plan/cj_dict_stub.js"></script>
+<script src="js_plan/cj_plan1_block.js"></script>
+<script src="js_plan/cj_plan1_stub.js"></script>
+<script src="js_plan/cj_plan2_block.js"></script>
+<script src="js_plan/cj_plan2_stub.js"></script>
+<script src="js_plan/cj_plan3_block.js"></script>
+<script src="js_plan/cj_plan3_stub.js"></script>
+<script src="js_plan/cj_plan4_block.js"></script>
+<script src="js_plan/cj_plan4_stub.js"></script>
+<script src="js_plan/workspace.js"></script>
+<script src="js_plan/cj_plan_skulpt.js"></script>
+<script src="js_plan/cj_footer.js"></script>
+<script>
+  function myUpdateFunction(event) {
+      var code = Blockly.Python.workspaceToCode(workspace);
+      document.getElementById('python-code').value = code;
+  }
+  workspace.addChangeListener(myUpdateFunction);
+</script>
+<script> load_footer("div_footer") </script>
+</html>
