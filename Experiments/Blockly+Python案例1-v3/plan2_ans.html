@@ -1,0 +1,631 @@
+<html>
+<head>
+    <meta charset="utf8" />
+    <meta title = "知识点教学安排"/>
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/cj.css">
+    <link rel="stylesheet" href="css/codemirror.css">
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/blockly_compressed.js"></script>
+    <script src="js/blocks_compressed.js"></script>
+    <script src="js/python_compressed.js"></script>
+    <script src="js/skulpt.min.js"></script>
+    <script src="js/skulpt-stdlib.js"></script>
+    <script src="js/zh-hans.js"></script>
+    <script src="js/codemirror.js"></script>
+    <script src="js/codemirror-python.js"></script>
+</head>
+<body>
+  <div id = "div_header"> </div>
+  <div>
+    <div class="main-wrp">
+      <div class="row">
+        <h2>知识点教学安排</h2>
+        <hr/>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_bg" style="margin-left:20px;">
+          了解题目背景
+        </button>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_tip" style="margin-left:20px;">
+          解答提示
+        </button>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_sample" style="margin-left:20px;">
+          本题用例
+        </button>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-xs-12 col-12">
+          <h2>Blockly</h2> 
+          <div id="blockly-div" style="width: 100%; height: 400px; "></div>
+        </div>  
+        <div class="col-md-6 col-xs-12 col-12">
+          <h2>Python Code</h2> 
+          <textarea  id="python-code"></textarea><br>
+        </div>
+      </div>
+      <div style="margin-top: 20px; text-align:center;">
+        <button class="btn btn-success" type="button" onclick="run_python(CodeMirrorEditor.getValue())"> 运行代码 </button> 
+      </div>
+      <div class="row" style="margin-top: 20px;">
+        <div class="col-md-6 col-xs-12">
+          <pre id="output" >点击运行可以看到结果哦</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="btn_pro_bg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body cj-alert-box">
+          <h3>题目背景:</h3><hr/>
+          <p>总所周知，安排教学是一个需要细细考量的活。</p>
+          <p>一个知识点的教导安排要关注到先修知识。</p>
+          <p>显然我们需要安排的教学计划力求教导这个知识点前，这个知识点需要的先修知识点都教过啦。</p>
+          <p>如果我们能够找到一个教学计划满足上面条件，我们称这个计划是优秀的。</p>
+          <p>我们已经能够通过blockly拼出一个可以跑出优秀计划的程序了</p>
+          <p>我们也初步了解python如何去写一个这样的程序了</p>
+          <p>但是我们的程序只能求解示例里的情况</p>
+          <p>我们就开始思考，如何应对更多的情况</p>
+          <h3>题目描述:</h3><hr/>
+          <p>请编写程序找到一个优秀的清单，可以自定义输入，并且通过验收。</p>
+          <h3>本题设计目标：</h3><hr/>
+          <p>了解字典dict、列表list。</p>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div class="modal fade" id="btn_pro_tip" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body cj-alert-box">
+          <h3>处理数据</h3><hr/>
+          <p>在整理清单之前，我们必然收集了资料，并且对资料进行了整理。</p>
+          <p>我们整理后的资料通常长什么样子呢？下面提供了一种可能的方案：</p>
+          <p>1. 知识点一： 作为[知识点二、知识点三]的先修知识，自身先修知识共计0个</p>
+          <p>2. 知识点二： 作为[知识点六]的先修知识，自身先修知识共计1个</p>
+          <p>3. 知识点三： 作为[知识点五、知识点八]的先修知识，自身先修知识共计1个</p>
+          <p>...</p>
+          <h3>了解字典</h3><hr/>
+          <p>这是不是很像我们用的字典：条目和其信息？</p>
+          <p>并不是所有语言都直接支持字典，但是大多数语言直接或通过库的形式支持了字典，例如：</p>
+          <p>python有dict、C++的STL里有类似字典的map，java里java.util下有类似字典的map。</p>
+          <p>在计算机编程中，字典是一种可变容器模型，且可存储任意类型对象。</p>
+          <p><b>Blockly的字典块</b></p>
+          <p>Blockly并没有直接提供字典块，为了方面，笔者自定义了一些字典块方便使用。</p>
+          <img src="image/blockly_dict.png" style = "width: 100%";/>
+          <p>目前字典提供了创建，插入、弹出、获得所有的key。</p>
+          <p>字典还有很多操作，不过目前我们先了解这些。</p>
+          <p><b>python的字典操作</b></p><hr/>
+          <p>定义一个字典：1.di = dict() 2. di = {key1:value1, key2:value2} </p>
+          <p>访问字典里的值:把相应的键放入熟悉的方括弧 di[key]</p>
+          <p>插入/修改字典:向字典添加新内容的方法是增加新的键/值对，修改已有键/值对, di[key] = new_value</p>
+          <p>删除字典中的一个key：del di[key] 或者 di.pop(key[, default])</p>
+          <p>...</p>
+          <h3>了解列表</h3>
+          <p>我们接着关注到每个知识点可以作为一堆知识点的先修知识，我们需要用一种方式保存他们。</p>
+          <p>他们有什么特点？<span style="color:red;">//todo</span></p>
+          <p>我们可以采用列表来保存</p>
+          <p>并不是所有语言都直接支持列表，但是大多数语言直接或通过库的形式支持了列表，例如：</p>
+          <p>python有list、C++的STL里有类似的vector,list，java里java.util下有类似的List, ArrayList。</p>
+          <p><b>Blockly的列表操作</b></p><hr/>
+          <img src="image/blockly_list.png" style = "width: 100%";/>
+          <p><b>Python的列表操作</b></p><hr/>
+          <p>定义一个列表：1.li = [] 2. li = [int, float, string] </p>
+          <p>访问列表里的值:用下标来访问，注意从0开始 li[0]</p>
+          <p>更多操作我们之后在进行讨论。</p>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div class="modal fade" id="btn_pro_sample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body cj-alert-box">
+          <h3>我们提供了一个简单的例子：</h3> <hr/>
+          <img src="image/pro_detail.png" width="100%"/>
+          <p>这张图非常容易看出[1,4,7,2,3,5,8,6,9]是一个优秀的清单。</p>
+          <p><strong style="color:red">但是:</strong></p>
+          <p>当要处理的知识点数量更多的时候<br/>当处理的数目更多的时候<br/>当其他问题其实本质相同的时候</p>
+          <p>程序，可以:<span style="align-items: center; color:red; font-size:2em">一劳永逸</span></p>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div id = "div_footer"> </div>
+</body>
+<xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none">
+  <variables>
+    <variable id="TN60?(%mns1Tha?daqma">source_dict</variable>
+    <variable id="7{s9).s6vl.9`Ep]R1}s">enable_dict</variable>
+    <variable id="dcLq/])-wl+NDR%Z~?U`">i</variable>
+  </variables>
+  <block type="plan_init2" id="[P*zX}5$K_8~dnTRJOky" x="93" y="94">
+    <next>
+      <block type="variables_set" id="Xb2l:@KNv]0jQ,t=g+Y.">
+        <field name="VAR" id="TN60?(%mns1Tha?daqma">source_dict</field>
+        <value name="VALUE">
+          <block type="dict_create_with" id="mf1##[r_eaw8D,S:}R!J"></block>
+        </value>
+        <next>
+          <block type="dict_push" id="(I!,@D@oeViH2]*~Twi,">
+            <value name="dict">
+              <block type="variables_get" id="D.+J,b-g%g+#}3E(^}rX">
+                <field name="VAR" id="TN60?(%mns1Tha?daqma">source_dict</field>
+              </block>
+            </value>
+            <value name="key">
+              <block type="text" id="oCwc$gVr2i:;heXHSOA`">
+                <field name="TEXT">1</field>
+              </block>
+            </value>
+            <value name="value">
+              <block type="plan_object" id="Oi^#$ZN4c|BxFMKsP!Fm">
+                <value name="NAME">
+                  <block type="lists_create_with" id="H4EU;Q5l~O*OAI(khq$P">
+                    <mutation items="2"></mutation>
+                    <value name="ADD0">
+                      <block type="text" id="$wI_s9%Ed2qVPP.F(HDy">
+                        <field name="TEXT">2</field>
+                      </block>
+                    </value>
+                    <value name="ADD1">
+                      <block type="text" id="M#_y2b*PNF2c-w*@^fR_">
+                        <field name="TEXT">3</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="dict_push" id="|?qE#D,Y(9*vR)Q;Gm`|">
+                <value name="dict">
+                  <block type="variables_get" id="D89sB(sn-7]a4{`Y+!tp">
+                    <field name="VAR" id="TN60?(%mns1Tha?daqma">source_dict</field>
+                  </block>
+                </value>
+                <value name="key">
+                  <block type="text" id="8/.tVtt1c0-]kSca2A/M">
+                    <field name="TEXT">2</field>
+                  </block>
+                </value>
+                <value name="value">
+                  <block type="plan_object" id="s1:$rA1+,FycFr.rUc*}">
+                    <value name="NAME">
+                      <block type="lists_create_with" id="{IG799esSL1Uf7C.m#Fg">
+                        <mutation items="1"></mutation>
+                        <value name="ADD0">
+                          <block type="text" id="4weuz0zcYPzbWj,6}VUJ">
+                            <field name="TEXT">6</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="dict_push" id="Q+lO82Z8r2@;}s`weCHi">
+                    <value name="dict">
+                      <block type="variables_get" id="bMF$=K-m:Jd.g_DObkt;">
+                        <field name="VAR" id="TN60?(%mns1Tha?daqma">source_dict</field>
+                      </block>
+                    </value>
+                    <value name="key">
+                      <block type="text" id="8wx3y}YSO0|Z{9CfEK-%">
+                        <field name="TEXT">3</field>
+                      </block>
+                    </value>
+                    <value name="value">
+                      <block type="plan_object" id="P]=ZvHy`j`g+%]E^=9tl">
+                        <value name="NAME">
+                          <block type="lists_create_with" id="0aS[6-q{UM$e4jXPfs{;">
+                            <mutation items="2"></mutation>
+                            <value name="ADD0">
+                              <block type="text" id="=,vA4(Xjv8m=[l;`e;7S">
+                                <field name="TEXT">5</field>
+                              </block>
+                            </value>
+                            <value name="ADD1">
+                              <block type="text" id=",.#x29yLD#hv{q?9jSdZ">
+                                <field name="TEXT">8</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="dict_push" id="[%nlc4ucI/YK#.y=GlWv">
+                        <value name="dict">
+                          <block type="variables_get" id="5CU;uDb4{$%6K?Z7JJ_x">
+                            <field name="VAR" id="TN60?(%mns1Tha?daqma">source_dict</field>
+                          </block>
+                        </value>
+                        <value name="key">
+                          <block type="text" id="c,N;Gg%Yk,0vRZ(sl30h">
+                            <field name="TEXT">4</field>
+                          </block>
+                        </value>
+                        <value name="value">
+                          <block type="plan_object" id="q*Ug,,-@k1|VT.@t}`9W">
+                            <value name="NAME">
+                              <block type="lists_create_with" id="1)Xcpg)Tf:oG]2CutD1o">
+                                <mutation items="1"></mutation>
+                                <value name="ADD0">
+                                  <block type="text" id="yBw_wB{Fn*]+4BGot)1=">
+                                    <field name="TEXT">3</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="dict_push" id="g1@ln.$rc9l*Oug([zrg">
+                            <value name="dict">
+                              <block type="variables_get" id="%(=M]Aw0=fnd4N%._fHV">
+                                <field name="VAR" id="TN60?(%mns1Tha?daqma">source_dict</field>
+                              </block>
+                            </value>
+                            <value name="key">
+                              <block type="text" id="1u_T~CLh+{FT^qWC|8y;">
+                                <field name="TEXT">5</field>
+                              </block>
+                            </value>
+                            <value name="value">
+                              <block type="plan_object" id="~[viJ.2Gq0Tco:y$ZT#y">
+                                <value name="NAME">
+                                  <block type="lists_create_with" id="QdvQPG!N-GGyiqs.iJXm">
+                                    <mutation items="1"></mutation>
+                                    <value name="ADD0">
+                                      <block type="text" id="riRtTN:^8#f#)ZZqyx}@">
+                                        <field name="TEXT">6</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="dict_push" id="D;ufAsMvoNIe/KqMAXz:">
+                                <value name="dict">
+                                  <block type="variables_get" id="Z_%8`}8MeQ=CU1?h1b#{">
+                                    <field name="VAR" id="TN60?(%mns1Tha?daqma">source_dict</field>
+                                  </block>
+                                </value>
+                                <value name="key">
+                                  <block type="text" id="knnXq+3n)1tEFh)Ia6yQ">
+                                    <field name="TEXT">6</field>
+                                  </block>
+                                </value>
+                                <value name="value">
+                                  <block type="plan_object" id="LKTK3P{dxB|ulp,sX+R7">
+                                    <value name="NAME">
+                                      <block type="lists_create_with" id="a$J}.ceSvgy5`;tSEe(}">
+                                        <mutation items="0"></mutation>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="dict_push" id="!bZC:W)8st:Q:BrjH_rb">
+                                    <value name="dict">
+                                      <block type="variables_get" id="+{iF!^vP$#o3{^Fbu@Ne">
+                                        <field name="VAR" id="TN60?(%mns1Tha?daqma">source_dict</field>
+                                      </block>
+                                    </value>
+                                    <value name="key">
+                                      <block type="text" id="_KU7a{7Zn0!UqJ_sVM__">
+                                        <field name="TEXT">7</field>
+                                      </block>
+                                    </value>
+                                    <value name="value">
+                                      <block type="plan_object" id=".Z|iURdj_R7M26w5_bT_">
+                                        <value name="NAME">
+                                          <block type="lists_create_with" id="7Q(^~0VN8#3`TEfrCV$s">
+                                            <mutation items="1"></mutation>
+                                            <value name="ADD0">
+                                              <block type="text" id="De}!4|I[e/)`WrnoN!r|">
+                                                <field name="TEXT">8</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="dict_push" id="J(zCbWM54c(~tTKNQ~8!">
+                                        <value name="dict">
+                                          <block type="variables_get" id="_@#%eU@?szQs;QZ9iHx6">
+                                            <field name="VAR" id="TN60?(%mns1Tha?daqma">source_dict</field>
+                                          </block>
+                                        </value>
+                                        <value name="key">
+                                          <block type="text" id="Z2/#Tq(O,w;zsYx.t|7v">
+                                            <field name="TEXT">8</field>
+                                          </block>
+                                        </value>
+                                        <value name="value">
+                                          <block type="plan_object" id="R@#vlME`Qb0aI[/q#{a:">
+                                            <value name="NAME">
+                                              <block type="lists_create_with" id="jRT=qrqC/CLrlX{Z2soO">
+                                                <mutation items="1"></mutation>
+                                                <value name="ADD0">
+                                                  <block type="text" id="O^2|3#?R;=ab*8Gic]zN">
+                                                    <field name="TEXT">9</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="dict_push" id="+xGTozG2X[F;BeOsA$}}">
+                                            <value name="dict">
+                                              <block type="variables_get" id="uM|~$Ak3BV4n`3,t!?Dn">
+                                                <field name="VAR" id="TN60?(%mns1Tha?daqma">source_dict</field>
+                                              </block>
+                                            </value>
+                                            <value name="key">
+                                              <block type="text" id="kuM6cITh%*kSS!1Sp-k0">
+                                                <field name="TEXT">9</field>
+                                              </block>
+                                            </value>
+                                            <value name="value">
+                                              <block type="plan_object" id="XnJ.Z2)aLaO?mM`UVpl$">
+                                                <value name="NAME">
+                                                  <block type="lists_create_with" id="#3=YEkG,wEb:AxnO`PO@">
+                                                    <mutation items="0"></mutation>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="plan_input2" id=",oQ[57Yc[D!;hJL;#rfC">
+                                                <value name="NAME">
+                                                  <block type="variables_get" id="d%!!J@6fxlCdjCmpL~tO">
+                                                    <field name="VAR" id="TN60?(%mns1Tha?daqma">source_dict</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="variables_set" id=",lT8T`=??=oLsi*/KTJE">
+                                                    <field name="VAR" id="7{s9).s6vl.9`Ep]R1}s">enable_dict</field>
+                                                    <value name="VALUE">
+                                                      <block type="plan_divide_dict1" id="G`]MxCc_Px^(FZzAM`|J"></block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="controls_whileUntil" id=":JWH,`kzZF]I^Cp$j5X!">
+                                                        <field name="MODE">WHILE</field>
+                                                        <value name="BOOL">
+                                                          <block type="plan_check_finish1" id="wZ9*Ig%9lNHcope9/VAX">
+                                                            <value name="NAME">
+                                                              <block type="variables_get" id="U0]6^C=it8sB*!!qTU^?">
+                                                                <field name="VAR" id="7{s9).s6vl.9`Ep]R1}s">enable_dict</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <statement name="DO">
+                                                          <block type="controls_forEach" id="Dx6HHU;hB{:FCb@mF7Ou">
+                                                            <field name="VAR" id="dcLq/])-wl+NDR%Z~?U`">i</field>
+                                                            <value name="LIST">
+                                                              <block type="variables_get" id="*!s4wMvW4f@+IkQaUfrd">
+                                                                <field name="VAR" id="7{s9).s6vl.9`Ep]R1}s">enable_dict</field>
+                                                              </block>
+                                                            </value>
+                                                            <statement name="DO">
+                                                              <block type="plan_deal1" id="9DU/*2m-or%6w8:FeRKW">
+                                                                <value name="enable_dict">
+                                                                  <block type="variables_get" id="ar5kzB}!;c6HDv5]JSRj">
+                                                                    <field name="VAR" id="7{s9).s6vl.9`Ep]R1}s">enable_dict</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="i">
+                                                                  <block type="variables_get" id="D0yU^hoI[Gun5V~fQwN2">
+                                                                    <field name="VAR" id="dcLq/])-wl+NDR%Z~?U`">i</field>
+                                                                  </block>
+                                                                </value>
+                                                                <next>
+                                                                  <block type="plan_append_answer1" id="cIz~J`eMGoGIx6W2,pRw">
+                                                                    <value name="NAME">
+                                                                      <block type="variables_get" id="6K`eVO.rP@hI-!^#t$kH">
+                                                                        <field name="VAR" id="dcLq/])-wl+NDR%Z~?U`">i</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </statement>
+                                                            <next>
+                                                              <block type="variables_set" id="`-3K_Em.yk-mm#.NLE^3">
+                                                                <field name="VAR" id="7{s9).s6vl.9`Ep]R1}s">enable_dict</field>
+                                                                <value name="VALUE">
+                                                                  <block type="plan_divide_dict1" id="Y[bf2xSNbQ?c{SIe$i4n"></block>
+                                                                </value>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </statement>
+                                                        <next>
+                                                          <block type="plan_output1" id="+QbFRF4jW8b9^REdb}8|"></block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
+<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+  <category name="本例提供的块" colour="#000000">
+    <block type="plan_init2"></block>
+    <block type="text">
+      <field name="TEXT"></field>
+    </block>
+    <block type="plan_object"></block>
+    <block type="plan_input2"></block>
+    <block type="plan_divide_dict1"></block>
+    <block type="plan_deal1"></block>
+    <block type="plan_append_answer1"></block>
+    <block type="plan_output1"></block>
+  </category>
+  <category name="字典" colour="#333399">
+    <block type="dict_create_with"></block>
+    <block type="dict_push"></block>
+    <block type="dict_pop"></block>
+    <block type="plan_dict_get_all_keys"></block>
+    <block type="plan_dict_is_empty"></block>
+  </category>
+  <category name="列表" colour="#745ba5">
+    <block type="lists_create_with">
+      <mutation items="0"></mutation>
+    </block>
+    <block type="lists_create_with">
+      <mutation items="3"></mutation>
+    </block>
+    <block type="lists_repeat">
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">5</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="lists_length"></block>
+    <block type="lists_isEmpty"></block>
+    <block type="lists_indexOf">
+      <field name="END">FIRST</field>
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR" id="sL3Zk=0(qFq~:cH{/RG(">list</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_getIndex">
+      <mutation statement="false" at="true"></mutation>
+      <field name="MODE">GET</field>
+      <field name="WHERE">FROM_START</field>
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR" id="sL3Zk=0(qFq~:cH{/RG(">list</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_setIndex">
+      <mutation at="true"></mutation>
+      <field name="MODE">SET</field>
+      <field name="WHERE">FROM_START</field>
+      <value name="LIST">
+        <block type="variables_get">
+          <field name="VAR" id="sL3Zk=0(qFq~:cH{/RG(">list</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_getSublist">
+      <mutation at1="true" at2="true"></mutation>
+      <field name="WHERE1">FROM_START</field>
+      <field name="WHERE2">FROM_START</field>
+      <value name="LIST">
+        <block type="variables_get">
+          <field name="VAR" id="sL3Zk=0(qFq~:cH{/RG(">list</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_split">
+      <mutation mode="SPLIT"></mutation>
+      <field name="MODE">SPLIT</field>
+      <value name="DELIM">
+        <shadow type="text">
+          <field name="TEXT">,</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="lists_sort">
+      <field name="TYPE">NUMERIC</field>
+      <field name="DIRECTION">1</field>
+    </block>
+  </category>
+  <category name="循环" colour="#5ba55b">
+    <block type="controls_repeat_ext">
+      <value name="TIMES">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="controls_whileUntil">
+      <field name="MODE">WHILE</field>
+    </block>
+    <block type="controls_for">
+      <field name="VAR" id="+tK~0_7,S@mOuMz,)#*O">i</field>
+      <value name="FROM">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="TO">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+      <value name="BY">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="controls_forEach">
+      <field name="VAR" id="D2;EES-n9epq+AL.NSUF">j</field>
+    </block>
+    <block type="controls_flow_statements">
+      <field name="FLOW">BREAK</field>
+    </block>
+  </category>
+  <category name="变量" colour="#a55b80" custom="VARIABLE"></category>
+</xml>
+
+<script src="js_plan/cj_plan1_block.js"></script>
+<script src="js_plan/cj_plan1_stub.js"></script>
+<script src="js_plan/cj_plan2_block.js"></script>
+<script src="js_plan/cj_plan2_stub.js"></script>
+<script src="js_plan/cj_dict_block.js"></script>
+<script src="js_plan/cj_dict_stub.js"></script>
+<script src="js_plan/cj_workspace.js"></script>
+<script src="js_plan/cj_plan_skulpt.js"></script>
+<script src="js_plan/cj_header.js"></script>
+<script src="js_plan/cj_footer.js"></script>
+<script> load_header("div_header") </script>
+<script> load_footer("div_footer") </script>
+</html>
