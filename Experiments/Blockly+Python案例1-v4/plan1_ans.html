@@ -1,0 +1,280 @@
+<html>
+<head>
+    <meta charset="utf8" />
+    <meta title = "知识点教学安排"/>
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/cj.css">
+    <link rel="stylesheet" href="css/codemirror.css">
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/blockly_compressed.js"></script>
+    <script src="js/blocks_compressed.js"></script>
+    <script src="js/python_compressed.js"></script>
+    <script src="js/skulpt.min.js"></script>
+    <script src="js/skulpt-stdlib.js"></script>
+    <script src="js/zh-hans.js"></script>
+    <script src="js/codemirror.js"></script>
+    <script src="js/codemirror-python.js"></script>
+</head>
+<body>
+  <div id = "div_header"> </div>
+  <div>
+    <div class="main-wrp">
+      <div class="row">
+        <h2>知识点教学安排</h2>
+        <hr/>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_bg" style="margin-left:20px;">
+          了解题目背景
+        </button>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_tip" style="margin-left:20px;">
+          解答提示
+        </button>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_sample" style="margin-left:20px;">
+          本题用例
+        </button>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-xs-12 col-12">
+          <h2>Blockly</h2> 
+          <div id="blockly-div" style="width: 100%; height: 400px; "></div>
+        </div>  
+        <div class="col-md-6 col-xs-12 col-12">
+          <h2>Python Code</h2> 
+          <textarea  id="python-code"></textarea><br>
+        </div>
+      </div>
+      <div style="margin-top: 20px; text-align:center;">
+        <button class="btn btn-success" type="button" onclick="run_python(CodeMirrorEditor.getValue())"> 运行代码 </button> 
+      </div>
+      <div class="row" style="margin-top: 20px;">
+        <div class="col-md-6 col-xs-12">
+          <pre id="output" >点击运行可以看到结果哦</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="btn_pro_bg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body cj-alert-box">
+          <h3>题目背景:</h3><hr/>
+          <p>总所周知，安排教学是一个需要细细考量的活。</p>
+          <p>一个知识点的教导安排要关注到先修知识。</p>
+          <p>显然我们需要安排的教学计划力求教导这个知识点前，这个知识点需要的先修知识点都教过啦。</p>
+          <p>如果我们能够找到一个教学计划满足上面条件，我们称这个计划是优秀的。</p>
+          <h3>题目描述:</h3><hr/>
+          <p>现在给定一张知识点清单和知识点间的关系(详细见本题用例)，请编写程序找到一个优秀的清单。</p>
+          <h3>本题设计目标：</h3><hr/>
+          <p>了解循环，掌握python的循环语法，包括while和for-each两种。</p>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div class="modal fade" id="btn_pro_tip" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body cj-alert-box">
+          <h3>我们通常会怎么做呢？</h3><hr/>
+          <p>1.开开会，了解一下目的，搜集下资料</p>
+          <p>2.整理一下这些知识点之间的关系</p>
+          <p>3.对知识点进行划分，分成可以立即教导的和不能立即教导的知识点，并获得可以立即教导的知识点</p>
+          <p>4.看看有没有可以立即教导的知识点，也就是检查一下刚刚获得的知识点集合是不是空集 </p>
+          <p>可是，刚刚获得的知识点集合是哪一个呢，我们是不是应该为他取个名字？不如就叫enable_dict</p>
+          <p>5.枚举<span style="color:red">每一个</span>能够教导的知识点</p>
+          <p>6.处理每一个能教的知识点</p>
+          <p>5.把能教的所有都安排上</p>
+          <p>6.对剩下的知识点进行划分，分成能可以立即教和不能立即教的</p>
+          <p>....不断重复这个操作直到没有可以立即教的</p>
+          <p>我们做完啦</p>
+          <h3>了解循环：</h3><hr/>
+          <p>在上面这个做法中，我们提到了"<span style="color:red">不断重复</span>"和"能教导的<span style="color:red">所有</span>"这个词，这两个词的出现往往意味着出现了循环操作。</p>
+          <p>循环语句允许我们执行一个语句或语句组多次。</p>
+          <p>基本上，所有的主流语言都支持循环，我们通过blockly来了解循环的共性：</p>
+          <img src="image/blockly_loops.png" width = 100%/>
+          <p>blockly看上去为我们提供了很多的循环：</p>
+          <p>第一种为当条件满足时重复执行，第二种为反复执行直到条件不满足，判断依据都是条件</p>
+          <p>第三种，第四种，第五种都是提前计算重复次数。</p>
+          <p>事实上，我们完全可以使用前两种方式替换后三种,而第一种和第二种之间可以相互转化。</p>
+          <p>主流的语言都支持循环语法，但为了帮助我们更好的阅读和编写代码，有些语言提供了更多的语法支持，但正如上面的描述，其实一种就够了。</p>
+          <h3>我们来看一种具体的语言python对于循环的支持</h3><hr/>
+          <p>Python 提供了 while 循环和 for 循环</p>
+          <p>Python 编程中 while 语句用于循环执行程序，即在某条件下，循环执行某段程序，以处理需要重复处理的相同任务。</p>
+          <p>Python 里 while 的基本形式:</p>
+          <pre>
+while 判断条件(condition)：
+  执行语句(statements)……
+          </pre>
+          <p>Python for循环可以遍历任何序列的项目，如一个列表或者一个字符串。</p>
+          <p>Python 里 for 的基本形式:</p>
+          <pre>
+for iterating_var in sequence:
+   statements(s)
+          </pre>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div class="modal fade" id="btn_pro_sample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body cj-alert-box">
+          <h3>我们提供了一个简单的例子：</h3> <hr/>
+          <img src="image/pro_detail.png" width="100%"/>
+          <p>这张图非常容易看出[1,4,7,2,3,5,8,6,9]是一个优秀的清单。</p>
+          <p><strong style="color:red">但是:</strong></p>
+          <p>当要处理的知识点数量更多的时候<br/>当处理的数目更多的时候<br/>当其他问题其实本质相同的时候</p>
+          <p>程序，可以:<span style="align-items: center; color:red; font-size:2em">一劳永逸</span></p>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div id = "div_footer"> </div>
+</body>
+<xml id="workspaceBlocks" style="display: none">
+  <variables>
+    <variable id="7{s9).s6vl.9`Ep]R1}s">enable_dict</variable>
+    <variable id="dcLq/])-wl+NDR%Z~?U`">i</variable>
+  </variables>
+  <block type="plan_init1" id="+P*!3j!NVxt,r3H|_](?" x="102" y="43">
+    <next>
+      <block type="plan_input1" id="#`:?ET.lImkxm*qxM}~c">
+        <next>
+          <block type="variables_set" id=",lT8T`=??=oLsi*/KTJE">
+            <field name="VAR" id="7{s9).s6vl.9`Ep]R1}s">enable_dict</field>
+            <value name="VALUE">
+              <block type="plan_divide_dict1" id="G`]MxCc_Px^(FZzAM`|J"></block>
+            </value>
+            <next>
+              <block type="controls_whileUntil" id=":JWH,`kzZF]I^Cp$j5X!">
+                <field name="MODE">WHILE</field>
+                <value name="BOOL">
+                  <block type="plan_check_finish1" id="wZ9*Ig%9lNHcope9/VAX">
+                    <value name="NAME">
+                      <block type="variables_get" id="U0]6^C=it8sB*!!qTU^?">
+                        <field name="VAR" id="7{s9).s6vl.9`Ep]R1}s">enable_dict</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO">
+                  <block type="controls_forEach" id="Dx6HHU;hB{:FCb@mF7Ou">
+                    <field name="VAR" id="dcLq/])-wl+NDR%Z~?U`">i</field>
+                    <value name="LIST">
+                      <block type="variables_get" id="*!s4wMvW4f@+IkQaUfrd">
+                        <field name="VAR" id="7{s9).s6vl.9`Ep]R1}s">enable_dict</field>
+                      </block>
+                    </value>
+                    <statement name="DO">
+                      <block type="plan_deal1" id="9DU/*2m-or%6w8:FeRKW">
+                        <value name="enable_dict">
+                          <block type="variables_get" id="ar5kzB}!;c6HDv5]JSRj">
+                            <field name="VAR" id="7{s9).s6vl.9`Ep]R1}s">enable_dict</field>
+                          </block>
+                        </value>
+                        <value name="i">
+                          <block type="variables_get" id="D0yU^hoI[Gun5V~fQwN2">
+                            <field name="VAR" id="dcLq/])-wl+NDR%Z~?U`">i</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="plan_append_answer1" id="cIz~J`eMGoGIx6W2,pRw">
+                            <value name="NAME">
+                              <block type="variables_get" id="6K`eVO.rP@hI-!^#t$kH">
+                                <field name="VAR" id="dcLq/])-wl+NDR%Z~?U`">i</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="variables_set" id="`-3K_Em.yk-mm#.NLE^3">
+                        <field name="VAR" id="7{s9).s6vl.9`Ep]R1}s">enable_dict</field>
+                        <value name="VALUE">
+                          <block type="plan_divide_dict1" id="Y[bf2xSNbQ?c{SIe$i4n"></block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="plan_output1" id="+QbFRF4jW8b9^REdb}8|"></block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
+<xml id="toolbox" style="display: none">
+  <category name="本例提供的块" colour="#5ba55b">
+    <block type="plan_init1"></block>
+    <block type="plan_input1"></block>
+    <block type="plan_divide_dict1"></block>
+    <block type="plan_check_finish1"></block>
+    <block type="plan_deal1"></block>
+    <block type="plan_append_answer1"></block>
+    <block type="plan_output1"></block>
+  </category>
+  <category name="循环" colour="#5ba55b">
+    <block type="controls_repeat_ext">
+      <value name="TIMES">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="controls_whileUntil">
+      <field name="MODE">WHILE</field>
+    </block>
+    <block type="controls_for">
+      <field name="VAR" id="+tK~0_7,S@mOuMz,)#*O">i</field>
+      <value name="FROM">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="TO">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+      <value name="BY">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="controls_forEach">
+      <field name="VAR" id="D2;EES-n9epq+AL.NSUF">j</field>
+    </block>
+    <block type="controls_flow_statements">
+      <field name="FLOW">BREAK</field>
+    </block>
+  </category>
+  <category name="变量" colour="#a55b80" custom="VARIABLE"></category>
+</xml>
+
+<script src="js_plan/cj_plan1_block.js"></script>
+<script src="js_plan/cj_plan1_stub.js"></script>
+<script src="js_plan/cj_workspace.js"></script>
+<script src="js_plan/cj_plan_skulpt.js"></script>
+<script src="js_plan/cj_header.js"></script>
+<script src="js_plan/cj_footer.js"></script>
+<script> load_header("div_header") </script>
+<script> load_footer("div_footer") </script>
+</html>

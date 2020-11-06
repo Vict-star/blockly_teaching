@@ -1,0 +1,165 @@
+<html>
+<head>
+    <meta charset="utf8" />
+    <meta title = "知识点教学安排"/>
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/cj.css">
+    <link rel="stylesheet" href="css/codemirror.css">
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/blockly_compressed.js"></script>
+    <script src="js/blocks_compressed.js"></script>
+    <script src="js/python_compressed.js"></script>
+    <script src="js/skulpt.min.js"></script>
+    <script src="js/skulpt-stdlib.js"></script>
+    <script src="js/zh-hans.js"></script>
+    <script src="js/codemirror.js"></script>
+    <script src="js/codemirror-python.js"></script>
+</head>
+<body>
+  <div id = "div_header"> </div>
+  <div>
+    <div class="main-wrp">
+      <div class="row">
+        <h2>知识点教学安排</h2>
+        <hr/>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_bg" style="margin-left:20px;">
+          了解题目背景
+        </button>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_tip" style="margin-left:20px;">
+          解答提示
+        </button>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_sample" style="margin-left:20px;">
+          总结
+        </button>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-xs-12 col-12">
+          <h2>Python Code</h2> 
+          <textarea  id="python-code"></textarea><br/>
+        </div>
+        <div class="col-md-6 col-xs-12 col-12">
+          <button class="btn btn-success" type="button" onclick="run_python(CodeMirrorEditor.getValue())"> 运行代码 </button> 
+          <pre id="output" >点击运行可以看到结果哦</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="btn_pro_bg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body cj-alert-box">
+          <h3>题目背景:</h3><hr/>
+          <p>总所周知，安排教学是一个需要细细考量的活。</p>
+          <p>一个知识点的教导安排要关注到先修知识。</p>
+          <p>显然我们需要安排的教学计划力求教导这个知识点前，这个知识点需要的先修知识点都教过啦。</p>
+          <p>如果我们能够找到一个教学计划满足上面条件，我们称这个计划是优秀的。</p>
+          <p>我们已经能够通过blockly拼出一个可以跑出优秀计划的程序了</p>
+          <p>我们进一步了解python如何去写一个这样的程序了，  我们甚至利用输入输出能应付不同情况</p>
+          <p>然后我们了解了循环、字典、列表、输入输出、函数，不过，我们都学的非常浅显，但是至少应对目前的情况已经足够了</p>
+          <p>当然，现在，我们使用python把这个问题实现一下吧。</p>
+          <h3>题目描述:</h3><hr/>
+          <p>利用python实现这个模块。</p>
+          <h3>本题设计目标：</h3> <hr/>
+          <p style="font-size: 2em;">巩固与总结，提问与答疑。</p>
+          <br/>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div class="modal fade" id="btn_pro_tip" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body cj-alert-box">
+          <h3>参考</h3><hr/>
+          <p>1.这里用到了copy，这是一个深度复制，需要引入库copy</p>
+          <p>提供函数代码:</p>
+          <pre><code>
+def plan_divide_dict(di) :
+  tmp = [i for i in di if di[i]["pre"] == 0]
+  res = dict([[i , di.pop(i)] for i in tmp])
+  #print(res)
+  return res
+
+def plan_deal(it, di) :
+  for j in it["nxt"]:
+    di[j]["pre"] = di[j]["pre"] - 1
+
+import copy
+def plan_gen_dict(di):
+  res = copy.deepcopy(di)
+  keys = di.keys()
+  for i in keys:
+    for j in di[i]["nxt"]:
+      if res.has_key(j):
+        res[j]["pre"] = res[j]["pre"] + 1
+      else:
+        print(j + "not in dict")
+        return {}
+  return res
+
+          </code></pre>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div class="modal fade" id="btn_pro_sample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body cj-alert-box">
+          <h3>设计：</h3>
+          <p>本系列主要是通过一个现实中的问题来讲述算法。</p>
+          <p>笔者通过Blockly的拼图方式，自顶向下设计，通过封装和解封装来突出重点。</p>
+          <h3>涉及知识点：</h3>
+          <ul>
+            <li>循环初步，包括while、for</li>
+            <li>字典初步，包括字典的建立、插入/更新、弹出、获得所有键、字典遍历</li>
+            <li>列表初步，包括列表建立、遍历、取值、追加</li>
+            <li>输入输出初步，包括input的简单使用、print的简单使用</li>
+            <li>函数初步，包括函数的创建、函数的调用</li>
+          </ul>
+          <h3>致谢：</h3>
+          <p>鸣谢@华南理工大学李粤老师的指导</p>
+          <h3>参考文献：</h3>
+          <p>本例基于Google Blockly项目，<a href="https://developers.google.com/blockly">技术文档</a></p>
+          <p>本例使用了开源框架skulpt，<a href="http://skulpt.org/">技术文档</a></p>
+          <p>本例引用了jquery-3.5.1.min、bootstrap、站酷快乐体</p>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div id = "div_footer"> </div>
+</body>
+</xml>
+
+<script>
+  var CodeMirrorTextArea = document.getElementById("python-code");
+var CodeMirrorEditor = CodeMirror.fromTextArea(CodeMirrorTextArea, {
+	mode: {name: "python",
+		   version: 3,
+		   singleLineStringErrors: false},
+	lineNumbers: true,
+	indentUnit: 4,
+	matchBrackets: true
+});
+CodeMirrorEditor.setSize("100%", "400px")
+//console.log("CodeMirrorEditor gen");
+
+</script>
+<script src="js_plan/cj_header.js"></script>
+<script src="js_plan/cj_footer.js"></script>
+<script> load_header("div_header") </script>
+<script> load_footer("div_footer") </script>
+</html>

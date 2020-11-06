@@ -1,0 +1,384 @@
+<html>
+<title>蛇形填数(循环条件)</title>
+<meta name="author" content="zcf grade18 scut-softwareEngineering 2020-7-27"/>
+<head>
+  <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/cj.css">
+    <link rel="stylesheet" href="css/codemirror.css">
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/blockly_compressed.js"></script>
+    <script src="js/blocks_compressed.js"></script>
+    <script src="js/python_compressed.js"></script>
+    <script src="js/skulpt.min.js"></script>
+    <script src="js/skulpt-stdlib.js"></script>
+    <script src="js/zh-hans.js"></script>
+    <script src="js/codemirror.js"></script>
+    <script src="js/codemirror-python.js"></script>
+    <script src="js_blocks/zcf_block_definitions.js"></script>
+    <script src="js_blocks/zcf_python_code.js"></script>
+</head>
+
+<body>
+  <div id = "div_header"> </div>
+  <div class="container">
+    <div class="main-wrp">
+      <div class="row">
+        <h2>蛇形填数</h2>
+        <hr/>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_bg" style="margin-left:20px;">
+          问题描述
+        </button>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_tip" style="margin-left:20px;">
+          思路参考
+        </button>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_sample" style="margin-left:20px;">
+          参考代码
+        </button>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-xs-12">
+         <h2>Blockly</h1> 
+          <div id="blockly-div" style="height: 480px; width: 100%;"></div>
+          <xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none">
+            <variables>
+              <variable id="j9d{dLg@9J=sa@NseL3)">n</variable>
+              <variable id="sgaR:Y4t(}A-D4H5Bk5Y">list2</variable>
+              <variable id=".w.bg(-MJZ7l]yTmP?pr">x</variable>
+              <variable id="/W#OG-|%QzoLi@T^Nmhm">y</variable>
+              <variable id="GkL6hm6RJ~c8;GvTs)9r">sum</variable>
+            </variables>
+            <block type="variables_set" id="J]$r~*9}!3=Sxz;IU~lV" x="10" y="10">
+              <field name="VAR" id="j9d{dLg@9J=sa@NseL3)">n</field>
+              <value name="VALUE">
+                <block type="math_number" id="IP#%f[GmA$XBgwY=0cw-">
+                  <field name="NUM">3</field>
+                </block>
+              </value>
+              <next>
+                <block type="variables_set" id="9pz]~k(*KnHbziT@bNMm">
+                  <field name="VAR" id="sgaR:Y4t(}A-D4H5Bk5Y">list</field>
+                  <value name="VALUE">
+                    <block type="lists_repeat" id="pRV9tm#$jtUsOTY91sXG">
+                      <value name="ITEM">
+                        <block type="math_number" id="k^p--O1a5#zQSXgNAjD.">
+                          <field name="NUM">-1</field>
+                        </block>
+                      </value>
+                      <value name="NUM">
+                        <shadow type="math_number" id="jh|VVc+:2#G+/[vJSpqp">
+                          <field name="NUM">5</field>
+                        </shadow>
+                        <block type="math_arithmetic" id="+d=.`FJD-ON5*7+3,k,w">
+                          <field name="OP">MULTIPLY</field>
+                          <value name="A">
+                            <shadow type="math_number" id="?73pqwkqxbN?3ax{OvOA">
+                              <field name="NUM">1</field>
+                            </shadow>
+                            <block type="variables_get" id="x;Fukuo1zcqWzV(?Qgw;">
+                              <field name="VAR" id="j9d{dLg@9J=sa@NseL3)">n</field>
+                            </block>
+                          </value>
+                          <value name="B">
+                            <shadow type="math_number" id="|{#xoPV^a-vhauBBQv!B">
+                              <field name="NUM">1</field>
+                            </shadow>
+                            <block type="variables_get" id="^~Fh]x]cZE,${Q4/.@E-">
+                              <field name="VAR" id="j9d{dLg@9J=sa@NseL3)">n</field>
+                            </block>
+                          </value>
+                        </block>
+                      </value>
+                    </block>
+                  </value>
+                  <next>
+                    <block type="variables_set" id="|44-5KJ|acyCO22MMzo}">
+                      <field name="VAR" id=".w.bg(-MJZ7l]yTmP?pr">x</field>
+                      <value name="VALUE">
+                        <block type="math_number" id="|2Da5.Bw`UO{Bl-jVPB4">
+                          <field name="NUM">0</field>
+                        </block>
+                      </value>
+                      <next>
+                        <block type="variables_set" id="dx,feF.4mS~%8RRV|/ox">
+                          <field name="VAR" id="/W#OG-|%QzoLi@T^Nmhm">y</field>
+                          <value name="VALUE">
+                            <block type="variables_get" id="LRQq~swueBZRI0Ky!/]G">
+                              <field name="VAR" id="j9d{dLg@9J=sa@NseL3)">n</field>
+                            </block>
+                          </value>
+                          <next>
+                            <block type="variables_set" id="G+!iy.u$Ls,WfOFq~,;f">
+                              <field name="VAR" id="GkL6hm6RJ~c8;GvTs)9r">sum</field>
+                              <value name="VALUE">
+                                <block type="math_number" id="?!s5?/b[BMVT3;,GEh9^">
+                                  <field name="NUM">1</field>
+                                </block>
+                              </value>
+                              <next>
+                                <block type="lists_setIndex" id="qTP0t=46yV=5M=kIzRF@">
+                                  <mutation at="true"></mutation>
+                                  <field name="MODE">SET</field>
+                                  <field name="WHERE">FROM_START</field>
+                                  <value name="LIST">
+                                    <block type="variables_get" id="_HcJrtb%Xz32XAG34|}T">
+                                      <field name="VAR" id="sgaR:Y4t(}A-D4H5Bk5Y">list</field>
+                                    </block>
+                                  </value>
+                                  <value name="AT">
+                                    <block type="variables_get" id="+gLsa54[@9SR1-Hkpp+q">
+                                      <field name="VAR" id="/W#OG-|%QzoLi@T^Nmhm">y</field>
+                                    </block>
+                                  </value>
+                                  <value name="TO">
+                                    <block type="math_number" id="mrt6+n[mKyWrCkAUp`l(">
+                                      <field name="NUM">1</field>
+                                    </block>
+                                  </value>
+                                  <next>
+            <block type="controls_whileUntil" id="--h!JX*(uO?-#DEp_Yz9" >
+              <field name="MODE">WHILE</field>
+              <value name="BOOL">
+                
+              </value>
+              <statement name="DO">
+                <block type="controls_whileUntil" id="$0IA%x,SzES1EB0wA6_/">
+                  <field name="MODE">WHILE</field>
+                  <value name="BOOL">
+                  
+                  </value>
+                  <statement name="DO">
+                    <block type="go_down" id="lkw7MN7rK|oG?GTWAXPQ"></block>
+                  </statement>
+                  <next>
+                    <block type="controls_whileUntil" id="?l]aOA[JQ.|6q]k}x7G$">
+                      <field name="MODE">WHILE</field>
+                      <value name="BOOL">
+                        
+                      </value>
+                      <statement name="DO">
+                        <block type="go_left" id="C}ld-Fos_4GL7cA].Qnq"></block>
+                      </statement>
+                      <next>
+                        <block type="controls_whileUntil" id="s,UW@rj1:D:TkM1GFcT0">
+                          <field name="MODE">WHILE</field>
+                          <value name="BOOL">
+                            
+                          </value>
+                          <statement name="DO">
+                            <block type="go_up" id="ibFd|ykA7d:f*W9w,53k"></block>
+                          </statement>
+                          <next>
+                            <block type="controls_whileUntil" id="=GYfGDE.W2;aK9XgS.UD">
+                              <field name="MODE">WHILE</field>
+                              <value name="BOOL">
+                                
+                              </value>
+                              <statement name="DO">
+                                <block type="go_right" id="^[$k{*1ii,c;^/I~.iVv"></block>
+                              </statement>
+                            </block>
+                          </next>
+                        </block>
+                      </next>
+                    </block>
+                  </next>
+                </block>
+              </statement>
+              <next>
+                <block type="text_print" id="R,%W*_W?knRU_$CnCHCx">
+                  <value name="TEXT">
+                    <block type="get_list" id="U,*Pf=K2xuXFvjMFk6f]"></block>
+                  </value>
+                </block>
+              </next>
+            </block>
+          </xml>
+          <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+            <category name="Math" colour="#5b67a5">
+              <block type="math_number">
+                <field name="NUM">0</field>
+              </block>
+              <block type="math_arithmetic">
+                <field name="OP">ADD</field>
+                <value name="A">
+                  <shadow type="math_number">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+                <value name="B">
+                  <shadow type="math_number">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+              </block>
+            </category>
+            <category name="Loops" colour="#a5745b">
+              <block type="controls_whileUntil">
+                <field name="MODE">WHILE</field>
+              </block>
+              <block type="controls_for">
+                <field name="VAR" id="Dy]wfW/uC}|qzBj?Hq]z">i</field>
+                <value name="FROM">
+                  <shadow type="math_number">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+                <value name="TO">
+                  <shadow type="math_number">
+                    <field name="NUM">10</field>
+                  </shadow>
+                </value>
+                <value name="BY">
+                  <shadow type="math_number">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+              </block>
+              <block type="controls_forEach">
+                <field name="VAR" id="ZdRz7`tEew2F`qiZT,Qp">k</field>
+              </block>
+            </category>
+            <category name="Logic" colour="#995ba5">
+              <block type="controls_if"></block>
+              <block type="logic_compare">
+                <field name="OP">EQ</field>
+              </block>
+              <block type="logic_operation">
+                <field name="OP">AND</field>
+              </block>
+            </category>
+            <category name="Text" colour="#5ba58c">
+              <block type="text_print">
+                <value name="TEXT">
+                  <shadow type="text">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                </value>
+              </block>
+            </category>
+            <category name="Lists" colour="#745ba5">
+              <block type="lists_repeat">
+                <value name="NUM">
+                  <shadow type="math_number">
+                    <field name="NUM">5</field>
+                  </shadow>
+                </value>
+              </block>
+              <block type="lists_getSublist">
+                <mutation at1="true" at2="true"></mutation>
+                <field name="WHERE1">FROM_START</field>
+                <field name="WHERE2">FROM_START</field>
+                <value name="LIST">
+                  <block type="variables_get">
+                    <field name="VAR" id="iygwb~XaD%X5lgpZwTSU">list</field>
+                  </block>
+                </value>
+              </block>
+              <block type="lists_setIndex">
+                <mutation at="true"></mutation>
+                <field name="MODE">SET</field>
+                <field name="WHERE">FROM_START</field>
+                <value name="LIST">
+                  <block type="variables_get">
+                    <field name="VAR" id="iygwb~XaD%X5lgpZwTSU">list</field>
+                  </block>
+                </value>
+              </block>
+            </category>
+            <category name="Variables" colour="#a55b80" custom="VARIABLE"></category>
+            <sep></sep>
+            <category name="calculations" colour="#9fa55b">
+              <block type="go_up"></block>
+              <block type="go_down"></block>
+              <block type="go_left"></block>
+              <block type="go_right"></block>
+            </category>
+            <category name="output" colour="#5ba58c">
+              <block type="get_list"></block>
+            </category>
+          </xml>
+        </div>
+      </div>
+      <div class="row">
+        <div id="python-div" class="col-md-8 col-xs-12">
+          <h2>Python Codes</h2> 
+          <textarea  id="python-code"></textarea><br>
+        </div>
+        <div class="col-md-4 col-xs-12">
+          <div class="col-md-3 col-xs-12" style="margin-top: 20px;" >
+            <button class="btn btn-success" type="button" onclick="run_python(CodeMirrorEditor.getValue())">Run</button> 
+          </div>
+          <pre id="output" >点击运行可以看到结果哦</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="btn_pro_bg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">问题描述</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body cj-alert-box">
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;涉及知识:变量、循环、判断、列表。注：此题输出按照从左到右，从上至下的顺序输出一列即可。<br></p>
+         <img src="image/pic.png" width="100%"/>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div class="modal fade " id="btn_pro_tip" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">思路参考</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body cj-alert-box">
+          <a target="_blank" href="https://blog.csdn.net/qq_33948567/article/details/80352362">思路参考></a></p>
+          <p>我们已经学过两种循环，一个是while、一个是for-each</p>
+          <p>我们复习一下这两种循环，并且指出本例中是什么循环</p>
+          <p>在循环中，设置循环条件是极其重要的，构造本例的循环条件</p>
+          <p>体会循环嵌套</p>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div class="modal fade" id="btn_pro_sample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+          <h3>循环条件设置参考</h3>
+          <p>结束条件显然是所有格子填完, 换言之 sum2累计到n*n的时候填完</p>
+          <p>一个方向无法再填数时，再进行下一个方向的填数,而一个方向无法再填数有很多表述，以向右填为例：</p>
+          <p>1. 不能超过边界 2. 下一个格子没有填过数</p>
+          <p>下一个格子是[x+1, y], 而我们只有一维数组，所以我们要进行转化</p>
+          <p>对于二维数组[x,y]映射到一维数组有很多方法，这里列举一种方法: (x, y) => x * n + y -1 </p>
+          <pre>x + 1 &le; n and list2[int(((x + 1) * n + y) - 1)] == -1</pre>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div id = "div_footer"> </div>
+</body>
+<script src="js_blocks/cj_workspace.js"></script>
+<script src="js_blocks/cj_skulpt.js"></script>
+<script>
+  function myUpdateFunction(event) {
+      var code = Blockly.Python.workspaceToCode(workspace);
+      document.getElementById('python-code').value = code;
+  }
+  workspace.addChangeListener(myUpdateFunction);
+</script>
+<script src="js_blocks/cj_header.js"></script>
+<script src="js_blocks/cj_footer.js"></script>
+<script> load_header("div_header") </script>
+<script> load_footer("div_footer") </script>
+</html>
