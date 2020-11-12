@@ -1,0 +1,320 @@
+<html>
+<head>
+    <meta charset="utf8" />
+    <meta title = "知识点教学安排"/>
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/cj.css">
+    <link rel="stylesheet" href="css/codemirror.css">
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/blockly_compressed.js"></script>
+    <script src="js/blocks_compressed.js"></script>
+    <script src="js/python_compressed.js"></script>
+    <script src="js/skulpt.min.js"></script>
+    <script src="js/skulpt-stdlib.js"></script>
+    <script src="js/zh-hans.js"></script>
+    <script src="js/codemirror.js"></script>
+    <script src="js/codemirror-python.js"></script>
+</head>
+<body>
+  <div id = "div_header"> </div>
+  <div>
+    <div class="main-wrp">
+      <div class="row">
+        <h2>知识点教学安排</h2>
+        <hr/>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_bg" style="margin-left:20px;">
+          了解列表
+        </button>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_tip" style="margin-left:20px;">
+          测试
+        </button>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-xs-12 col-12">
+          <h2>Blockly</h2> 
+          <div id="blockly-div" style="width: 100%; height: 400px; "></div>
+        </div>  
+        <div class="col-md-6 col-xs-12 col-12">
+          <h2>Python Code</h2> 
+          <textarea  id="python-code"></textarea><br>
+        </div>
+      </div>
+      <div style="margin-top: 20px; text-align:center;">
+        <button class="btn btn-success" type="button" onclick="run_python(CodeMirrorEditor.getValue())"> 运行代码 </button> 
+      </div>
+      <div class="row" style="margin-top: 20px;">
+        <div class="col-md-6 col-xs-12">
+          <pre id="output" >点击运行可以看到结果哦</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="btn_pro_bg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body cj-alert-box">
+          <h3>获取列表的值</h3><hr/>
+          <p>可以通过索引获取列表的值</p>
+          <p>基本语法: </p>
+          <p>使用下标索引来访问列表中的值，同样也可以使用方括号的形式截取</p>
+          <p>切片的用法: [起始位置:终止位置:截取间隔]</p>
+          <p>负数代表从后往前数</p>
+          <p>例子：</p>
+          <pre><code>
+a = [1, "2", [3, "4"], [5, 6]]
+b = a[0]
+print(b)
+c = a[1:3]
+print(c)
+d = a[:2]
+print(d)
+e = a[:-1]
+print(e)
+f = a[::2]
+print(f)
+g = a[::-1]
+print(g)
+
+          </code></pre>
+          <p>由于python有可变对象和不可变对象之分，当字典的键保存的值为可变对象时，获取的是其值的引用</p>
+          <p>例子：</p>
+          <pre><code>
+a = [1, "2", [3, "4"], [5, 6]]
+b = a[0]
+print(id(a[0]), id(b))
+c = a[2]
+print(id(a[2]), id(c))
+c.append(7)
+print(a)
+          </code></pre>
+          <p>观察其不同</p>
+          <p>不可变对象的复制操作：Alice 有一个文档，复印了一份给Bob</p>
+          <p>Bob对文档的修改不会影响到Alice 的文档</p>
+          <p>可变对象的复制操作：Alice 有一个在线文档，共享链接给Bob</p>
+          <p>Bob对文档的修改会Alice的文档，因为看上去是两个的文档其实是一个文档</p>
+          <h3>题目描述:</h3><hr/>
+          <p>了解如何获取列表中的值</p>
+          <h3>本题设计目标：</h3><hr/>
+          <p>了解字典dict的指获取。</p>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div class="modal fade" id="btn_pro_tip" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body cj-alert-box">
+          <h3>获取列表的值</h3>
+          <ol>
+            <li>创建一个列表A  [1, "2", [3, "4"], [5, 6]]</li>
+            <li>获取a = A[2] </li>
+            <li>修改该对象，并观察字典A的变化</li>
+            <li>创建一个B = A</li>
+            <li>修改a, 观察字典B的变化</li>
+            <li>切片测试：利用切片构造新的列表</li>
+            <li>观察A[1:4]</li>
+            <li>观察A[1:4:2]</li>
+            <li>观察A[1:4:-1]</li>
+            <li>观察A[:3]</li>
+            <li>观察A[-1:]</li>
+          </ol>
+          <p>通过测试</p>
+          <p>tips: 可以通过print观察列表</p>
+          <p>了解列表的深度复制, copy.deepcopy()</p>
+          <p>了解[:]并不能达到copy.deepcopy的效果，因为只复制了一层</p>
+          <p>例如：</p>
+          <pre><code>
+a = [[[2,3],[3,4]],[5]]
+b = a[:]
+a[0][0].append(1)
+print(b)
+          </code></pre>
+          <img src = "image/pro3_after2_answer.png" width="100%"/>
+          <p>测试三和测试四目前并不方便使用blockly表示，尝试使用python来写</p>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div id = "div_footer"> </div>
+</body>
+<xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none"></xml>
+<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+  <category name="本例提供的块" colour="#000000">
+    <block type="text">
+      <field name="TEXT"></field>
+    </block>
+    <block type="math_number">
+      <field name="NUM"></field>
+    </block>
+    <block type="text_print">
+      <value name="TEXT">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="plan_list_test_get">
+      <field name="NAME">#ff0000</field>
+      <value name="list1">
+        <shadow type="lists_create_with">
+          <mutation items="0"></mutation>
+        </shadow>
+      </value>
+      <value name="list2">
+        <shadow type="lists_create_with">
+          <mutation items="0"></mutation>
+        </shadow>
+      </value>
+      <value name="list3">
+        <shadow type="lists_create_with">
+          <mutation items="0"></mutation>
+        </shadow>
+      </value>
+      <value name="list4">
+        <shadow type="lists_create_with">
+          <mutation items="0"></mutation>
+        </shadow>
+      </value>
+      <value name="list5">
+        <shadow type="lists_create_with">
+          <mutation items="0"></mutation>
+        </shadow>
+      </value>
+      <value name="list6">
+        <shadow type="lists_create_with">
+          <mutation items="0"></mutation>
+        </shadow>
+      </value>
+    </block>
+    <block type="lists_create_with">
+      <mutation items="4"></mutation>
+      <value name="ADD0">
+        <block type="math_number">
+          <field name="NUM">1</field>
+        </block>
+      </value>
+      <value name="ADD1">
+        <block type="text">
+          <field name="TEXT">2</field>
+        </block>
+      </value>
+      <value name="ADD2">
+        <block type="lists_create_with">
+          <mutation items="2"></mutation>
+          <value name="ADD0">
+            <block type="math_number">
+              <field name="NUM">3</field>
+            </block>
+          </value>
+          <value name="ADD1">
+            <block type="text">
+              <field name="TEXT">4</field>
+            </block>
+          </value>
+        </block>
+      </value>
+      <value name="ADD3">
+        <block type="lists_create_with">
+          <mutation items="2"></mutation>
+          <value name="ADD0">
+            <block type="math_number">
+              <field name="NUM">5</field>
+            </block>
+          </value>
+          <value name="ADD1">
+            <block type="math_number">
+              <field name="NUM">6</field>
+            </block>
+          </value>
+        </block>
+      </value>
+    </block>  
+  </category>
+  <category name="列表" colour="#745ba5">
+    <block type="lists_create_with">
+      <mutation items="0"></mutation>
+    </block>
+    <block type="lists_create_with">
+      <mutation items="3"></mutation>
+    </block>
+    <block type="lists_repeat">
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">5</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="lists_indexOf">
+      <field name="END">FIRST</field>
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR" id="sL3Zk=0(qFq~:cH{/RG(">list</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_getIndex">
+      <mutation statement="false" at="true"></mutation>
+      <field name="MODE">GET</field>
+      <field name="WHERE">FROM_START</field>
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR" id="sL3Zk=0(qFq~:cH{/RG(">list</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_setIndex">
+      <mutation at="true"></mutation>
+      <field name="MODE">SET</field>
+      <field name="WHERE">FROM_START</field>
+      <value name="LIST">
+        <block type="variables_get">
+          <field name="VAR" id="sL3Zk=0(qFq~:cH{/RG(">list</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_getSublist">
+      <mutation at1="true" at2="true"></mutation>
+      <field name="WHERE1">FROM_START</field>
+      <field name="WHERE2">FROM_START</field>
+      <value name="LIST">
+        <block type="variables_get">
+          <field name="VAR" id="sL3Zk=0(qFq~:cH{/RG(">list</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_split">
+      <mutation mode="SPLIT"></mutation>
+      <field name="MODE">SPLIT</field>
+      <value name="DELIM">
+        <shadow type="text">
+          <field name="TEXT">,</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="lists_sort">
+      <field name="TYPE">NUMERIC</field>
+      <field name="DIRECTION">1</field>
+    </block>
+  </category>
+  <category name="变量" colour="#a55b80" custom="VARIABLE"></category>
+</xml>
+
+<script src="js_plan/cj_plan3-after2-block.js"></script>
+<script src="js_plan/cj_plan3-after2-stub.js"></script>
+<script src="js_plan/cj_workspace.js"></script>
+<script src="js_plan/cj_plan_skulpt.js"></script>
+<script src="js_plan/cj_header.js"></script>
+<script src="js_plan/cj_footer.js"></script>
+<script> load_header("div_header") </script>
+<script> load_footer("div_footer") </script>
+</html>

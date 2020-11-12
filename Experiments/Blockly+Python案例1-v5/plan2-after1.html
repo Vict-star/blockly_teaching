@@ -1,0 +1,189 @@
+<html>
+<head>
+    <meta charset="utf8" />
+    <meta title = "知识点教学安排"/>
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/cj.css">
+    <link rel="stylesheet" href="css/codemirror.css">
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/blockly_compressed.js"></script>
+    <script src="js/blocks_compressed.js"></script>
+    <script src="js/python_compressed.js"></script>
+    <script src="js/skulpt.min.js"></script>
+    <script src="js/skulpt-stdlib.js"></script>
+    <script src="js/zh-hans.js"></script>
+    <script src="js/codemirror.js"></script>
+    <script src="js/codemirror-python.js"></script>
+</head>
+<body>
+  <div id = "div_header"> </div>
+  <div>
+    <div class="main-wrp">
+      <div class="row">
+        <h2>知识点教学安排</h2>
+        <hr/>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_bg" style="margin-left:20px;">
+          了解字典
+        </button>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_tip" style="margin-left:20px;">
+          测试
+        </button>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-xs-12 col-12">
+          <h2>Blockly</h2> 
+          <div id="blockly-div" style="width: 100%; height: 400px; "></div>
+        </div>  
+        <div class="col-md-6 col-xs-12 col-12">
+          <h2>Python Code</h2> 
+          <textarea  id="python-code"></textarea><br>
+        </div>
+      </div>
+      <div style="margin-top: 20px; text-align:center;">
+        <button class="btn btn-success" type="button" onclick="run_python(CodeMirrorEditor.getValue())"> 运行代码 </button> 
+      </div>
+      <div class="row" style="margin-top: 20px;">
+        <div class="col-md-6 col-xs-12">
+          <pre id="output" >点击运行可以看到结果哦</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="btn_pro_bg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body cj-alert-box">
+          <h3>创建字典</h3><hr/>
+          <p>字典由键和对应值成对组成。字典也被称作关联数组或哈希表</p>
+          <p>基本语法：</p>
+          <p>变量 = dict 或 变量 = {} 或 变量 = {key : value , key2 = value2, ...}</p>
+          <p>其中key必须为不可变对象</p>
+          <p>例子：</p>
+          <pre><code>
+a = dict()
+b = {}
+c = {1 : 2}
+d = {1 : "2"}
+e = {1 : ["2"]}
+f = {1 : {1 : 2}}
+g = {"1" : 2}
+h = {1 : 2, "1" : "2"}
+i = dict([[1, 2], ["1", "2"]])
+          </code></pre>
+          <p>其中</p>
+          <ol>
+            <li>a : 创建一个空字典</li>
+            <li>b : 创建一个空字典</li>
+            <li>c : 创建一个key为数字1，value为数字2的字典</li>
+            <li>d : 创建一个key为数字1，value为数字2的字典</li>
+            <li>e : 创建一个key为数字1，value为链表["2"]的字典</li>
+            <li>f : 创建一个key为数字1，value为字典{1 : 2} 的字典</li>
+            <li>g : 创建一个key为字符1，value为数字2的字典</li>
+            <li>h ：创建一个key1为数字1，value1为数字2，key2为字符1，value2为字符2的字典</li>
+            <li>i : 通过列表创建一个字典</li>
+          </ol>
+          <h3>题目描述:</h3><hr/>
+          <p>了解如何创建字典</p>
+          <h3>本题设计目标：</h3><hr/>
+          <p>了解字典dict的创建。</p>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div class="modal fade" id="btn_pro_tip" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body cj-alert-box">
+          <h3>创建字典</h3>
+          <ol>
+            <li>创建一个空字典</li>
+            <li>创建一个字典，其中字典里只有一对键值，键为字符串类型的123，值为字符串类型的123</li>
+            <li>创建一个字典，其中字典里只有一对键值，键为字符串类型的123，值为数值类型的123</li>
+            <li>创建一个字典，其中字典里只有一对键值，键为数值类型的123，值为字符串类型的123</li>
+            <li>创建一个字典，其中字典里只有一对键值，键为数值类型的123，值为数值类型的123</li>
+            <li>创建一个字典，其中字典里只有一对键值，键为数值类型的123，值为一个空字典</li>
+            <li>创建一个字典，其中字典里只有一对键值，键为数值类型的123，值为包含{"123":123}的字典</li>
+            <li>创建一个字典，其中字典里只有两对键值，第一对：键为数值类型的123，值为包含{"123":123}的字典，第二对：键为字符串类型的123，值为包含{123:"123"}的字典</li>
+          </ol>
+          <p>验收：通过验收测试</p>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div id = "div_footer"> </div>
+</body>
+<xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none"></xml>
+<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+  <category name="本例提供的块" colour="#000000">
+    <block type="text">
+      <field name="TEXT"></field>
+    </block>
+    <block type="math_number">
+      <field name="NUM"></field>
+    </block>
+    <block type="text_print">
+      <value name="TEXT">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="plan_dict_text_create">
+      <field name="NAME">#ff0000</field>
+      <value name="dict1">
+        <shadow type="dict_create_with"></shadow>
+      </value>
+      <value name="dict2">
+        <shadow type="dict_create_with"></shadow>
+      </value>
+      <value name="dict3">
+        <shadow type="dict_create_with"></shadow>
+      </value>
+      <value name="dict4">
+        <shadow type="dict_create_with"></shadow>
+      </value>
+      <value name="dict5">
+        <shadow type="dict_create_with"></shadow>
+      </value>
+      <value name="dict6">
+        <shadow type="dict_create_with"></shadow>
+      </value>
+      <value name="dict7">
+        <shadow type="dict_create_with"></shadow>
+      </value>
+      <value name="dict8">
+        <shadow type="dict_create_with"></shadow>
+      </value>
+    </block>
+  </category>
+  <category name="字典" colour="#333399">
+    <block type="dict_create_with"></block>
+  </category>
+  <category name="变量" colour="#a55b80" custom="VARIABLE"></category>
+</xml>
+
+<script src="js_plan/cj_plan1_block.js"></script>
+<script src="js_plan/cj_plan1_stub.js"></script>
+<script src="js_plan/cj_plan2_block.js"></script>
+<script src="js_plan/cj_plan2_stub.js"></script>
+<script src="js_plan/cj_plan2-after1-block.js"></script>
+<script src="js_plan/cj_plan2-after1-stub.js"></script>
+<script src="js_plan/cj_dict_block.js"></script>
+<script src="js_plan/cj_dict_stub.js"></script>
+<script src="js_plan/cj_workspace.js"></script>
+<script src="js_plan/cj_plan_skulpt.js"></script>
+<script src="js_plan/cj_header.js"></script>
+<script src="js_plan/cj_footer.js"></script>
+<script> load_header("div_header") </script>
+<script> load_footer("div_footer") </script>
+</html>

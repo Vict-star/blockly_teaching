@@ -1,0 +1,256 @@
+<html>
+<title>Blockly采蘑菇</title>
+<meta name="author" content="zcf grade18 scut-softwareEngineering 2020-10-25"/>
+<head>
+  <title>Blockly</title>
+  <meta name="author" content="zcf grade18 scut-softwareEngineering 2020-10-25; Chrisjaunes grade18 2020-11-06"/>
+  <!-- 这里是样式相关-->
+  <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/cj.css">
+  <!-- js 脚本相关 -->
+  <script src="js/jquery-3.5.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <!-- 与blockly有关的js脚本 -->
+  <script src="js/blockly_compressed.js"></script>
+  <script src="js/blocks_compressed.js"></script>
+  <script src="js/python_compressed.js"></script>
+  <script src="js/javascript_compressed.js"></script>
+  <script src="js/zh-hans.js"></script>
+  <!-- 与动画绘制相关的脚本-->
+  <script src="js/canvas.js"></script>
+  <!-- 自定义的js脚本-->
+  <script src="block_s/block2_definitions.js"></script>
+  <script src="block_s/block2_code.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="main-wrp">
+      <div class="row">
+        <h2>采蘑菇catch the mushroom:</h2>
+        <hr/>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_bg" style="margin-left:20px;">
+          问题描述
+        </button>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_tip" style="margin-left:20px;">
+          参考资料
+        </button>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-xs-12">
+          <h2>Blockly</h2> 
+          <div id="blocklyDiv" style="height: 480px; width: 100%;"></div>
+          <xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none"></xml>
+          <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+            <category name="预置操作块" colour="#5b67a5">
+              <block type="set_hero"></block>
+              <block type="block_move">
+              </block>
+            </category>
+            <category name="预置值块" colour="ed7684">
+              <block type="block_direction">
+              </block>
+              <block type="block_hero"></block>
+              <block type="math_number">
+                <field name="NUM">0</field>
+              </block>
+              <block type="math_arithmetic">
+                <field name="OP">ADD</field>
+                <value name="A">
+                  <shadow type="math_number">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+                <value name="B">
+                  <shadow type="math_number">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+              </block>
+              <block type="text"></block>
+            </category>
+          </xml>
+        </div>
+     </div>
+     <div class="row">
+        <div id="python-div" class="col-md-6 col-xs-12">
+          <h2>Python Codes:</h2>
+          <br/>
+          <textarea  id="python-code" rows="20" cols="70" readonly></textarea><br>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <h2>click ‘Run’ to eat the mushroom</h2>
+          <br/>
+          <div id="gameMap"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-xs-12" style="margin-top: 20px;" >
+          <button id="trigger" class="btn btn-danger" type="button" onclick="enableKey()">KeyLock</button>
+          <button class="btn btn-success" type="button" onclick="runcode()">Run</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="btn_pro_bg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">问题描述</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body cj-alert-box">
+          <h2>复现案例</h2>
+          <p>本例作为Blockly基本设置的考核</p>
+          <p>要求一：利用blcokly的块相关知识，包括type、message、args0、name、check、colour、previousStatement、nextStatement、tooltip，设计blockly块set_hero</p>
+          <p>该自定义块要求:<br/>type为set_hero<br/>接收一个input_value<br/>该input_value的name为hero<br/>具有previousStatement和nextStatement</p>
+          <p>要求二：利用blcokly的块相关知识，包括field_image，设计blockly块block_hero</p>
+          <p>该自定义块要求:<br/>type为block_hero<br/>接收一个field_image<br/>
+            该field_image的src为http://b-ssl.duitang.com/uploads/item/201807/12/20180712152411_htrtv.jpg<br/>长宽均为100、具有output</p>
+          <p>要求三：利用blcokly的块相关知识，包括inputsInline，设计blockly块block_move</p>
+          <p>该自定义块要求:<br/>type为block_move<br/>接收两个input_value<br/>第一个input_value的name为direction，check为["Number","block_direction"]<br/>
+            第二个input_value的name为steps,check为"Number"<br/>内联，即inputsInline为true<br/>具有previousStatement和nextStatement</p>
+          <p>要求四：利用blcokly的块相关知识，包括field_dropdown，设计blockly块block_move</p>
+          <p>该自定义块要求:<br/>type为block_direction<br/>接收一个field_dropdown<br/>下了菜单有四个元素，上下左右<br/>
+            内联，即inputsInline为true<br/>具有previousStatement和nextStatement</p>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div class="modal fade " id="btn_pro_tip" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">参考资料</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body cj-alert-box">
+          <p>利用Blockly Developer ToolsHelp，设计blockly的代码块</p>
+          <p>本例展示了四种不同的块的编写方式</p>
+          <h2>要求一</h2>
+          <pre><code>
+{
+  "type": "set_hero",
+  "message0": "选取英雄 %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "hero",
+      "check": [
+        "block_hero",
+        "String"
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 230,
+  "tooltip": "可用hblock_hero或字符串输入url",
+  "helpUrl": ""
+}
+          </code></pre>
+          <h2>要求二</h2>
+          <pre><code>
+{
+  "type": "block_hero",
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_image",
+      "src": "https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1596080592&di=2476f97357d77ef9477a48ddb9b69dbb&src=http://b-ssl.duitang.com/uploads/item/201807/12/20180712152411_htrtv.jpg",
+      "width": 100,
+      "height": 100,
+      "alt": "*"
+    }
+  ],
+  "output": "block_hero",
+  "tooltip": "",
+  "helpUrl": ""
+}
+          </code></pre>
+          <pre><code>
+{
+  "type": "block_move",
+  "message0": "hero向 %1 走 %2 步",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "direction",
+      "check": [
+        "Number",
+        "block_direction"
+      ]
+    },
+    {
+      "type": "input_value",
+      "name": "steps",
+      "check": "Number"
+    }
+  ],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 315,
+  "tooltip": "第一个参数：方向（1,2,3,4的数字或自定义方向块）；第二个参数：步数，每步为模型一个身长",
+  "helpUrl": ""
+}
+          </code></pre>
+          <pre><code>
+{
+  "type": "block_direction",
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "direction",
+      "options": [
+        [
+          "上方",
+          "1"
+        ],
+        [
+          "下方",
+          "2"
+        ],
+        [
+          "左方",
+          "3"
+        ],
+        [
+          "右方",
+          "4"
+        ]
+      ]
+    }
+  ],
+  "output": null,
+  "colour": 120,
+  "tooltip": "",
+  "helpUrl": ""
+}
+        </code></pre>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div id = "div_footer"> </div>
+</body>
+<script src="js/workspace.js"></script>
+<script>
+  function myUpdateFunction(event) {
+      var code = Blockly.Python.workspaceToCode(workspace);
+      document.getElementById('python-code').value = code;
+  }
+  function runcode(){
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    eval(code);
+  }
+  workspace.addChangeListener(myUpdateFunction);
+  document.getElementById("gameMap").appendChild(cvs); // 将新建的canvas渲染到页面
+</script>
+<script src="js/cj_footer.js"></script>
+<script> load_footer("div_footer") </script>
+</html>
+ 

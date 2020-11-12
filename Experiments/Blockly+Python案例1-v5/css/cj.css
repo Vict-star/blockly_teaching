@@ -1,0 +1,71 @@
+@font-face {  
+	font-family: zcool_happy;  
+	src: url("../ttf/zcool_happy.ttf")
+} 
+body{
+    background: #000000 url(../image/main-bg.jpg);
+}
+.main-wrp{
+    background:#fff;
+    box-shadow:0px 0px 10px #555;
+    padding: 20px;
+}
+.container,.header,.footer{
+	/* for smooth animated effect */
+	transition:all .2s linear;
+	-moz-transition:all .2s linear;/* firefox */
+	-webkit-transition:all .2s linear; /* safari and chrome */
+	-o-transition:all .2s linear; /* opera */
+	-ms-transition:all .2s linear;
+}
+.cj-alert-box{
+	font-family: zcool_happy;
+}
+
+.cj-navbar{
+	display: flex;
+	filter:alpha(Opacity=80);
+}
+.cj-navbar ul {
+	margin: 5px 5px;
+	list-style: none;
+}
+.cj-navbar a {
+	position: relative;
+	display: inline-block;
+	margin: 5px 5px;
+	outline: none;
+	color: white;
+	text-decoration: none;
+	letter-spacing: 1px;
+	font-weight: 400;
+	text-shadow: 0 0 1px rgba(255,255,255,0);
+	font-size: 1.35em;
+	padding: 0 0;
+	
+}
+.cj-navbar a::after {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	height: 4px;
+	background: rgba(255,255,255,1);
+	content: '';
+	opacity: 0;
+	-webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+	-moz-transition: opacity 0.3s, -moz-transform 0.3s;
+	transition: opacity 0.3s, transform 0.3s;
+	-webkit-transform: translateY(10px);
+	-moz-transform: translateY(10px);
+	transform: translateY(10px);
+}
+.cj-navbar a:hover::after{
+	opacity: 1;
+	-webkit-transform: translateY(0px);
+	-moz-transform: translateY(0px);
+	transform: translateY(0px);
+}
+.cj-navbar{
+	margin-left: auto!important;
+}

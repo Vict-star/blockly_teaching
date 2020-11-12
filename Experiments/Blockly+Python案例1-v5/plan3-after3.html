@@ -1,0 +1,208 @@
+<html>
+<head>
+    <meta charset="utf8" />
+    <meta title = "知识点教学安排"/>
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/cj.css">
+    <link rel="stylesheet" href="css/codemirror.css">
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/blockly_compressed.js"></script>
+    <script src="js/blocks_compressed.js"></script>
+    <script src="js/python_compressed.js"></script>
+    <script src="js/skulpt.min.js"></script>
+    <script src="js/skulpt-stdlib.js"></script>
+    <script src="js/zh-hans.js"></script>
+    <script src="js/codemirror.js"></script>
+    <script src="js/codemirror-python.js"></script>
+</head>
+<body>
+  <div id = "div_header"> </div>
+  <div>
+    <div class="main-wrp">
+      <div class="row">
+        <h2>知识点教学安排</h2>
+        <hr/>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_bg" style="margin-left:20px;">
+          了解列表
+        </button>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_tip" style="margin-left:20px;">
+          测试
+        </button>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-xs-12 col-12">
+          <h2>Blockly</h2> 
+          <div id="blockly-div" style="width: 100%; height: 400px; "></div>
+        </div>  
+        <div class="col-md-6 col-xs-12 col-12">
+          <h2>Python Code</h2> 
+          <textarea  id="python-code"></textarea><br>
+        </div>
+      </div>
+      <div style="margin-top: 20px; text-align:center;">
+        <button class="btn btn-success" type="button" onclick="run_python(CodeMirrorEditor.getValue())"> 运行代码 </button> 
+      </div>
+      <div class="row" style="margin-top: 20px;">
+        <div class="col-md-6 col-xs-12">
+          <pre id="output" >点击运行可以看到结果哦</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="btn_pro_bg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body cj-alert-box">
+          <h3>在列表中修改对象</h3><hr/>
+          <p>基本语法: </p>
+          <p> 列表[索引]=新值</p>
+          <p>例子：</p>
+          <pre><code>
+a = [1,2]
+a[1] = [1,1]
+print(a)
+          </code></pre>
+          <p>观察列表A</p>
+          <p>	list.append(obj) 在列表末尾添加新的对象</p>
+          <p> list.extend(seq) 在列表末尾一次性追加另一个序列中的多个值（用新列表扩展原来的列表）</p>
+          <p> list.insert(index, obj) 将对象插入列表</p>
+          <pre><code>
+A = []
+A.append([1, 2, 3])
+print(A)
+A.extend([1, 2, 3])
+print(A)
+A.insert(0,0)
+print(A)  
+          </code></pre>
+          <h3>题目描述:</h3><hr/>
+          <p>了解如何插入或者修改列表</p>
+          <h3>本题设计目标：</h3><hr/>
+          <p>了解列表list的插入与修改。</p>
+          <img src = "image/pro3_after3_answer.png" width="100%"/>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div class="modal fade" id="btn_pro_tip" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body cj-alert-box">
+          <h3>在列表中插入或修改对象</h3>
+          <p>尝试设计列表，并且插入与修改列表</p>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div id = "div_footer"> </div>
+</body>
+<xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none"></xml>
+<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+  <category name="本例提供的块" colour="#000000">
+    <block type="text">
+      <field name="TEXT"></field>
+    </block>
+    <block type="math_number">
+      <field name="NUM"></field>
+    </block>
+    <block type="text_print">
+      <value name="TEXT">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+  </category>
+  <category name="列表" colour="#745ba5">
+    <block type="lists_create_with">
+      <mutation items="0"></mutation>
+    </block>
+    <block type="lists_create_with">
+      <mutation items="3"></mutation>
+    </block>
+    <block type="lists_repeat">
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">5</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="lists_length"></block>
+    <block type="lists_isEmpty"></block>
+    <block type="lists_indexOf">
+      <field name="END">FIRST</field>
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR" id="sL3Zk=0(qFq~:cH{/RG(">list</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_getIndex">
+      <mutation statement="false" at="true"></mutation>
+      <field name="MODE">GET</field>
+      <field name="WHERE">FROM_START</field>
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR" id="sL3Zk=0(qFq~:cH{/RG(">list</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_setIndex">
+      <mutation at="true"></mutation>
+      <field name="MODE">SET</field>
+      <field name="WHERE">FROM_START</field>
+      <value name="LIST">
+        <block type="variables_get">
+          <field name="VAR" id="sL3Zk=0(qFq~:cH{/RG(">list</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_getSublist">
+      <mutation at1="true" at2="true"></mutation>
+      <field name="WHERE1">FROM_START</field>
+      <field name="WHERE2">FROM_START</field>
+      <value name="LIST">
+        <block type="variables_get">
+          <field name="VAR" id="sL3Zk=0(qFq~:cH{/RG(">list</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_split">
+      <mutation mode="SPLIT"></mutation>
+      <field name="MODE">SPLIT</field>
+      <value name="DELIM">
+        <shadow type="text">
+          <field name="TEXT">,</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="lists_sort">
+      <field name="TYPE">NUMERIC</field>
+      <field name="DIRECTION">1</field>
+    </block>
+    <block type="list_append"></block>
+    <block type="list_extend"></block>
+    <block type="list_insert"></block>
+  </category>
+  <category name="变量" colour="#a55b80" custom="VARIABLE"></category>
+</xml>
+
+<script src="js_plan/cj_list_block.js"></script>
+<script src="js_plan/cj_list_stub.js"></script>
+<script src="js_plan/cj_workspace.js"></script>
+<script src="js_plan/cj_plan_skulpt.js"></script>
+<script src="js_plan/cj_header.js"></script>
+<script src="js_plan/cj_footer.js"></script>
+<script> load_header("div_header") </script>
+<script> load_footer("div_footer") </script>
+</html>

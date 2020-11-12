@@ -1,0 +1,185 @@
+<html>
+<title>Blockly采蘑菇</title>
+<meta name="author" content="zcf grade18 scut-softwareEngineering 2020-10-25"/>
+<head>
+  <title>Blockly</title>
+  <meta name="author" content="zcf grade18 scut-softwareEngineering 2020-10-25; Chrisjaunes grade18 2020-11-06"/>
+  <!-- 这里是样式相关-->
+  <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/cj.css">
+  <!-- js 脚本相关 -->
+  <script src="js/jquery-3.5.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <!-- 与blockly有关的js脚本 -->
+  <script src="js/blockly_compressed.js"></script>
+  <script src="js/blocks_compressed.js"></script>
+  <script src="js/python_compressed.js"></script>
+  <script src="js/javascript_compressed.js"></script>
+  <script src="js/zh-hans.js"></script>
+  <!-- 与动画绘制相关的脚本-->
+  <script src="js/canvas.js"></script>
+  <!-- 自定义的js脚本-->
+  <script src="block_s/block3_definitions.js"></script>
+  <script src="block_s/block3_code_python.js"></script>
+  <script src="block_s/block3_code_javascript.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="main-wrp">
+      <div class="row">
+        <h2>采蘑菇catch the mushroom:</h2>
+        <hr/>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_bg" style="margin-left:20px;">
+          问题描述
+        </button>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#btn_pro_tip" style="margin-left:20px;">
+          参考资料
+        </button>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-xs-12">
+          <h2>Blockly</h2> 
+          <div id="blocklyDiv" style="height: 480px; width: 100%;"></div>
+          <xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none"></xml>
+          <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+            <category name="预置操作块" colour="#5b67a5">
+              <block type="set_hero"></block>
+              <block type="block_move">
+              </block>
+            </category>
+            <category name="预置值块" colour="ed7684">
+              <block type="block_direction">
+              </block>
+              <block type="block_hero"></block>
+              <block type="math_number">
+                <field name="NUM">0</field>
+              </block>
+              <block type="math_arithmetic">
+                <field name="OP">ADD</field>
+                <value name="A">
+                  <shadow type="math_number">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+                <value name="B">
+                  <shadow type="math_number">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+              </block>
+              <block type="text"></block>
+            </category>
+          </xml>
+        </div>
+     </div>
+     <div class="row">
+        <div id="python-div" class="col-md-6 col-xs-12">
+          <h2>Python Codes:</h2>
+          <br/>
+          <textarea  id="python-code" rows="20" cols="70" readonly></textarea><br>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <h2>click ‘Run’ to eat the mushroom</h2>
+          <br/>
+          <div id="gameMap"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-xs-12" style="margin-top: 20px;" >
+          <button id="trigger" class="btn btn-danger" type="button" onclick="enableKey()">KeyLock</button>
+          <button class="btn btn-success" type="button" onclick="runcode()">Run</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="btn_pro_bg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">问题描述</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body cj-alert-box">
+          <h2>复现案例</h2>
+          <p>本例作为Blockly基本设置的考核</p>
+          <p>要求一：利用blcokly的代码生成的相关知识，设计blockly块的代码显示</p>
+          <p>为set_hero、block_hero、block_move、block_direction实现Blockly到Python的转换</p>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div class="modal fade " id="btn_pro_tip" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">参考资料</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          
+        </div>
+        <div class="modal-body cj-alert-box">
+          <p>利用blockly的代码生成机制生成python代码</p>
+          <p>我们在block中设置过type，也设置过name，这两个参数可以用来获得对应的对象</p>
+          <p>Blockly.Python['X']可以为一个type为X的块设置Block转Code的方法，当Blockly.Python.workspaceToCode被调用的时候，这些方法被调用</p>
+          <p>在有Block中如果存在input，可以通过Blockly.Python.valueToCode获得input所代表的python代码</p>
+          <p>code可能是语句，也可能是表达式</p>
+          <p>表达式具有优先级，一条a+b*c的表达式在常规意义下，先计算b*c后计算+是正确的，而计算a+b，然后计算*往往会得到不正确的结果</p>
+          <p>我们需要为表达式定义优先级，而Blockly已经为我们提供了这样的方法，比如[code, Blockly.Python.ORDER_NONE]</p>
+          <p>这样会导致多余的括号，但是并不影响代码的运行</p>
+          <p>Python的相关知识会在后续了解，本处只要掌握如何显示一些Block代表的东西</p>
+          <pre><code>
+Blockly.Python['set_hero'] = function(block) {
+  var hero = Blockly.Python.valueToCode(block, 'hero', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  if(hero[0]=='(')
+    hero = hero.substr(1,hero.length-2);
+  var code = 'changeHero('+hero+')\n';
+  return code;
+};
+Blockly.Python['block_hero'] = function(block) {
+  // TODO: Assemble Python into code variable.
+  var code = '\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1596080592&di=2476f97357d77ef9477a48ddb9b69dbb&src=http://b-ssl.duitang.com/uploads/item/201807/12/20180712152411_htrtv.jpg\"';
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.Python.ORDER_NONE];
+};
+Blockly.Python['block_move'] = function(block) {
+  var direction = Blockly.Python.valueToCode(block, 'direction', Blockly.Python.ORDER_ATOMIC);
+  var steps = Blockly.Python.valueToCode(block, 'steps', Blockly.Python.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  direction = direction.substr(1,direction.length - 2);
+  var code ='move('+direction +','+steps+')\n';
+  return code;
+};
+Blockly.Python['block_direction'] = function(block) {
+  var dropdown_direction = block.getFieldValue('direction');
+  // TODO: Assemble JavaScript into code variable.
+  var code = dropdown_direction;
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.Python.ORDER_NONE];
+};  
+</code></pre>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <div id = "div_footer"> </div>
+</body>
+<script src="js/workspace.js"></script>
+<script>
+  function myUpdateFunction(event) {
+      var code = Blockly.Python.workspaceToCode(workspace);
+      document.getElementById('python-code').value = code;
+  }
+  function runcode(){
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    eval(code);
+  }
+  workspace.addChangeListener(myUpdateFunction);
+  document.getElementById("gameMap").appendChild(cvs); // 将新建的canvas渲染到页面
+</script>
+<script src="js/cj_footer.js"></script>
+<script> load_footer("div_footer") </script>
+</html>
+ 

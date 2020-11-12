@@ -1,0 +1,136 @@
+<xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none">
+  <variables>
+    <variable id="db]VuGOr;-wz,@(G^Av?">source_dict</variable>
+    <variable id="tS=:R%mrliBg#e`=,ev3">remain_dict</variable>
+    <variable id="Jbv?N%!r^p,V.AdDbuYz">enable_dict</variable>
+    <variable id="*h)!bHYn7T.aK9hJK4%T">i</variable>
+    <variable id="CiVOAV?dbA1;}AjRBj,$">j</variable>
+  </variables>
+  <block type="plan_init3" id="iEm9HBW9})w(D$/6SvN1" x="-113" y="-262">
+    <next>
+      <block type="variables_set" id="G!JfBm2X]9Jb:5)*ww-S">
+        <field name="VAR" id="db]VuGOr;-wz,@(G^Av?">source_dict</field>
+        <value name="VALUE">
+          <block type="plan_gen_source" id="S2a[lq1u9,bOG6qRrx}j"></block>
+        </value>
+        <next>
+          <block type="variables_set" id=")1$=XS)R,cc?VDi[vG.-">
+            <field name="VAR" id="tS=:R%mrliBg#e`=,ev3">remain_dict</field>
+            <value name="VALUE">
+              <block type="plan_input3" id="HU`r.zSk~O74lC,C1sc=">
+                <value name="NAME">
+                  <block type="variables_get" id="-LN#?_;Fwilb;s,]S(9C">
+                    <field name="VAR" id="db]VuGOr;-wz,@(G^Av?">source_dict</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="M?|]78`e$qe~NngNs%sp">
+                <field name="VAR" id="Jbv?N%!r^p,V.AdDbuYz">enable_dict</field>
+                <value name="VALUE">
+                  <block type="plan_divide_dict1" id="9??}VUDXs_qRSY(U{]jF"></block>
+                </value>
+                <next>
+                  <block type="controls_whileUntil" id="j4SR{PqK(zM%pvk+7BS;">
+                    <field name="MODE">WHILE</field>
+                    <value name="BOOL">
+                      <block type="plan_dict_is_empty" id="Uyo]E)?XY-ciH_WPWqY#">
+                        <value name="NAME">
+                          <block type="variables_get" id="Doic+sVP4ye^Ng~-3(8L">
+                            <field name="VAR" id="Jbv?N%!r^p,V.AdDbuYz">enable_dict</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO">
+                      <block type="controls_forEach" id="9Q1W1:*[cy)TOGqD/q.H">
+                        <field name="VAR" id="*h)!bHYn7T.aK9hJK4%T">i</field>
+                        <value name="LIST">
+                          <block type="variables_get" id="Z5TL~zE$=^%WXCo$mJi=">
+                            <field name="VAR" id="Jbv?N%!r^p,V.AdDbuYz">enable_dict</field>
+                          </block>
+                        </value>
+                        <statement name="DO">
+                          <block type="controls_forEach" id="%9.;;$=pz3m,f-JIJ]x}">
+                            <field name="VAR" id="CiVOAV?dbA1;}AjRBj,$">j</field>
+                            <value name="LIST">
+                              <block type="plan_object_get" id=".(S7(ox-.GoIFv{t#PGO">
+                                <field name="NAME">nxt</field>
+                                <value name="NAME">
+                                  <block type="plan_dict_get" id="IBZvYX.9hkCaX3)=~7PO">
+                                    <value name="dict">
+                                      <block type="variables_get" id="0UitI3%1f+-!+Bvpf7nb">
+                                        <field name="VAR" id="Jbv?N%!r^p,V.AdDbuYz">enable_dict</field>
+                                      </block>
+                                    </value>
+                                    <value name="key">
+                                      <block type="variables_get" id="8KvF0P}0C}2*l)~#N#{7">
+                                        <field name="VAR" id="*h)!bHYn7T.aK9hJK4%T">i</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO">
+                              <block type="plan_var_dec" id="L8HVR=B^5r#x^V$sn]oq">
+                                <value name="NAME">
+                                  <block type="plan_object_get" id="1O_,d,_BptH/=yB3(={N">
+                                    <field name="NAME">pre</field>
+                                    <value name="NAME">
+                                      <block type="plan_dict_get" id="8skzU|*IIt@]2[GHNvN9">
+                                        <value name="dict">
+                                          <block type="variables_get" id="0-1JuaFg^hRWl,gk|R{2">
+                                            <field name="VAR" id="tS=:R%mrliBg#e`=,ev3">remain_dict</field>
+                                          </block>
+                                        </value>
+                                        <value name="key">
+                                          <block type="variables_get" id="UPXmb0HA(1a+`3FF_W}u">
+                                            <field name="VAR" id="CiVOAV?dbA1;}AjRBj,$">j</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="plan_append_answer1" id="+XTSRb(fGBJX(JHVz}mb">
+                                <value name="NAME">
+                                  <block type="variables_get" id="=,@3w~Re[b6MyN{OYO{[">
+                                    <field name="VAR" id="*h)!bHYn7T.aK9hJK4%T">i</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="variables_set" id="@+XX/j7@x9UsWk+~o|e0">
+                            <field name="VAR" id="Jbv?N%!r^p,V.AdDbuYz">enable_dict</field>
+                            <value name="VALUE">
+                              <block type="plan_divide_dict1" id="p0u!3ZZA~4~@d%G|X1?D"></block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="text_print" id="Vpu-F;Xf?#7FrjS-n/pv">
+                        <value name="TEXT">
+                          <block type="plan_output3" id="A{$5GNnd=RbWS5A6AYwj"></block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
